@@ -1,4 +1,4 @@
-package main
+package time
 
 import (
 	"bufio"
@@ -9,7 +9,8 @@ import (
 	"time"
 )
 
-func main() {
+//SubDay 日期相減
+func SubDay() {
 	fmt.Println("輸入時間 格式範例:2006-01-02")
 	timeStr := time.Now().Format("2006-01-02") //現在時間
 	inputReader := bufio.NewReader(os.Stdin)
