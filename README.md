@@ -12,3 +12,4 @@ golang小教室
 
 # 範例執行
 go run main.go就可以
+go test -v -bench=. 測試名稱_test.go -benchmem
