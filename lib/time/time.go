@@ -41,3 +41,13 @@ func SubDay() {
 	fmt.Println("現在時間-輸入時間")
 	fmt.Println("剩餘天數", day)
 }
+
+//TimetoFormat 顯示time Format
+func TimetoFormat() {
+	p := fmt.Println
+
+	t := time.Now()
+	p("No Format =", t)
+	p("RFC3339 =", t.Format(time.RFC3339))
+	p("RFC3339Nano =", t.Format(time.RFC3339Nano))
+}

@@ -1,4 +1,4 @@
-package inttest
+package test
 
 import (
 	"fmt"

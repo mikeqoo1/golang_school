@@ -1,7 +1,8 @@
 package main
 
 import (
-	A "golang_school/lib"
+	B "golang_school/lib/string"
+	A "golang_school/lib/time"
 )
 
 func init() {
@@ -9,5 +10,8 @@ func init() {
 }
 
 func main() {
-	A.SubDay()
+	A.TimetoFormat()
+	//A.SubDay()
+	B.PadLeft("123", 5, "0")
+	B.PadRight("123", 5, "0")
 }
