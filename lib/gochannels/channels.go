@@ -6,7 +6,7 @@ import (
 )
 
 //ABC 變數使用
-var ABC = make(chan []byte, 1024)
+var ABC = make(chan []byte, 5)
 var c = 10
 
 //TestChannel 測試通道使用
@@ -20,8 +20,8 @@ func TestChannel() {
 	time.Sleep(time.Microsecond * 100)
 	time.Sleep(time.Microsecond * 100)
 	go bigbang()
-	//go bigbang()
-	//go bigbang()
+	go bigbang()
+	go bigbang()
 	//go bigbang()
 	//go bigbang()
 	time.Sleep(time.Microsecond * 100)
