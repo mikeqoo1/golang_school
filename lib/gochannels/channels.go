@@ -11,7 +11,6 @@ var c = 10
 
 //TestChannel 測試通道使用
 func TestChannel() {
-	fmt.Println("Channel TEST go")
 	go blackpink("5", "6", "7", "8123450")
 	go blackpink("1", "2", "3", "4987659")
 	go blackpink("A", "B", "C", "DXYZP")
