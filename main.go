@@ -1,14 +1,18 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
+	D "golang_school/lib/db"
 	C "golang_school/lib/gochannels"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 )
 
-func init() {
+var pool *sql.DB
 
+func init() {
+	pool = D.InitDB()
 }
 
 func main() {
