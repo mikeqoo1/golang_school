@@ -23,5 +23,10 @@ func main() {
 	B.PadLeft("123", 5, "0")
 	B.PadRight("123", 5, "0")
 	fmt.Println("goroutine")
+	fmt.Println("LeetcodeNo.3")
+	fmt.Println(B.LengthOfLongestSubstring("aab"))
+	fmt.Println(B.LengthOfLongestSubstring("aab"))
+	fmt.Println(B.LengthOfLongestSubstring("bbbbb"))
+	fmt.Println(B.LengthOfLongestSubstring("pwwkew"))
 	C.TestChannel()
 }
