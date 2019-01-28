@@ -50,4 +50,8 @@ func TimetoFormat() {
 	p("No Format =", t)
 	p("RFC3339 =", t.Format(time.RFC3339))
 	p("RFC3339Nano =", t.Format(time.RFC3339Nano))
+	sad := fmt.Sprintf("%02d%02d%02d", t.Hour(), t.Minute(), t.Second())
+	//BBB := t.Minute()
+	//CCC := t.Second()
+	p("AAA =", sad)
 }
