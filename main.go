@@ -36,6 +36,7 @@ func main() {
 
 }
 
+//findMedianSortedArrays 尋找中位數
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	i, j := 0, 0
 	nums3 := []int{}

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"strconv"
+	"unicode/utf8"
 )
 
 //PadLeft 左邊補齊
@@ -62,4 +63,22 @@ func LengthOfLongestSubstring(s string) int {
 		//fmt.Println("start =", start)
 	}
 	return length
+}
+
+//GoRUNS 解析 rune 型態
+func GoRUNS() {
+	var str = "hello, 你好嗎?"
+	//golang中string底層是用byte實作的，len 實際是在用字元長度計算大小 所以一中文占3個字元長度,大小就是12了
+	fmt.Println("len(str):", len(str))
+
+	//以下2種方法都可以得到str的字串的長度
+
+	//golang中的unicode/utf8包提供了用utf-8獲取長度的方法
+	fmt.Println("RuneCountInString:", utf8.RuneCountInString(str))
+
+	//用rune型態來unicode字串
+	fmt.Println("rune:", len([]rune(str)))
+
+	//byte 等於int8， 大致用来處理ascii字元
+	//rune 等於int32, 大致用来處理unicode或utf-8字串
 }
