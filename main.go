@@ -22,6 +22,10 @@ func main() {
 	fmt.Println("字串處理")
 	B.PadLeft("123", 5, "0")
 	B.PadRight("123", 5, "0")
+	fmt.Println("JsonToStruct")
+	B.TestJsonToStruct()
+	fmt.Println("StructToJson")
+	B.TestStructToJson()
 	fmt.Println("goroutine")
 	fmt.Println("LeetcodeNo.3")
 	fmt.Println(B.LengthOfLongestSubstring("aab"))
@@ -33,7 +37,6 @@ func main() {
 	nums2 := []int{3, 4}
 	Q := findMedianSortedArrays(nums1, nums2)
 	fmt.Println(Q)
-
 }
 
 //findMedianSortedArrays 尋找中位數

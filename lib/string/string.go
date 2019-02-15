@@ -2,10 +2,16 @@ package string
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"unicode/utf8"
 )
+
+type Test struct {
+	Name string
+	Age  int
+}
 
 //PadLeft 左邊補齊
 func PadLeft(str string, length int, pad string) string {
@@ -81,4 +87,26 @@ func GoRUNS() {
 
 	//byte 等於int8， 大致用来處理ascii字元
 	//rune 等於int32, 大致用来處理unicode或utf-8字串
+}
+
+//TestJsonToStruct json轉stuct
+func TestJsonToStruct() {
+	jsonStr := `{"name": "sky","age": 20}`
+	fmt.Println("json 格式:", jsonStr)
+
+	var a Test
+	json.Unmarshal([]byte(jsonStr), &a)
+	fmt.Println("轉 Struct 格式:", a)
+}
+
+//TestStructToJson stuct轉json
+func TestStructToJson() {
+	var a Test
+	a.Name = "mike"
+	a.Age = 24
+	fmt.Println("Struct 格式:", a)
+
+	//Struct 轉 Json
+	jsonBytes, _ := json.Marshal(a)
+	fmt.Println("轉 json 格式:", string(jsonBytes))
 }
