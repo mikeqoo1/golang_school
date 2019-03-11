@@ -1,5 +1,7 @@
 package leetcode
 
+import "fmt"
+
 //FindMedianSortedArrays 尋找中位數
 func FindMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	i, j := 0, 0
@@ -29,4 +31,50 @@ func FindMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	} else {
 		return float64(nums3[(lenSums3+1)/2-1])
 	}
+}
+
+//Reverse 反轉整數 123 -> 321 -123 -> -321
+func Reverse(x int) int {
+	reverseans := 0
+	if x < 0 {
+		x = -x
+		for x > 0 {
+			fmt.Println("0.")
+			reverseans *= 10
+			fmt.Println("1.", "x =", x)
+			fmt.Println("1.", "reverseans =", reverseans)
+			reverseans += x % 10
+			fmt.Println("2.", "x =", x)
+			fmt.Println("2.", "reverseans =", reverseans)
+			x /= 10
+			fmt.Println("3.", "x =", x)
+			fmt.Println("3.", "reverseans =", reverseans)
+		}
+
+		reverseans = -reverseans
+		if reverseans < -2147483648 {
+			return 0
+		}
+
+		return reverseans
+	}
+
+	for x > 0 {
+		fmt.Println("0.")
+		reverseans *= 10
+		fmt.Println("1.", "x =", x)
+		fmt.Println("1.", "reverseans =", reverseans)
+		reverseans += x % 10
+		fmt.Println("2.", "x =", x)
+		fmt.Println("2.", "reverseans =", reverseans)
+		x /= 10
+		fmt.Println("3.", "x =", x)
+		fmt.Println("3.", "reverseans =", reverseans)
+	}
+
+	if reverseans > 2147483647 {
+		return 0
+	}
+
+	return reverseans
 }

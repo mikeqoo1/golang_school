@@ -34,5 +34,7 @@ func main() {
 	nums2 := []int{3, 4}
 	Q := L.FindMedianSortedArrays(nums1, nums2)
 	fmt.Println(Q)
+	P := L.Reverse(-123)
+	fmt.Println(P)
 
 }
