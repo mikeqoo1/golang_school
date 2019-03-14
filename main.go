@@ -40,4 +40,6 @@ func main() {
 	fmt.Println(Q)
 	P := L.Reverse(-123)
 	fmt.Println(P)
+	PP := L.MyAtoi(" -456")
+	fmt.Println(PP)
 }
