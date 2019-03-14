@@ -23,6 +23,10 @@ func main() {
 	fmt.Println("字串處理")
 	B.PadLeft("123", 5, "0")
 	B.PadRight("123", 5, "0")
+	fmt.Println("JsonToStruct")
+	B.TestJsonToStruct()
+	fmt.Println("StructToJson")
+	B.TestStructToJson()
 	fmt.Println("goroutine")
 	fmt.Println("LeetcodeNo.3")
 	fmt.Println(B.LengthOfLongestSubstring("aab"))
@@ -36,5 +40,4 @@ func main() {
 	fmt.Println(Q)
 	P := L.Reverse(-123)
 	fmt.Println(P)
-
 }
