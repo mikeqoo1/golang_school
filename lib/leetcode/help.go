@@ -127,6 +127,7 @@ func MyAtoi(str string) int {
 
 //IsPalindrome 判斷回文數
 func IsPalindrome(x int) bool {
+	// 先把原數字%10 在 /10 依照此步驟來反轉
 	if x < 0 {
 		return false
 	}
