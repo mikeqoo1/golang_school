@@ -42,4 +42,6 @@ func main() {
 	fmt.Println(P)
 	PP := L.MyAtoi(" -456")
 	fmt.Println(PP)
+	PPP := L.IsPalindrome(121)
+	fmt.Println(PPP)
 }

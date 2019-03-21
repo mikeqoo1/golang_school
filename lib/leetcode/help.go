@@ -124,3 +124,25 @@ func MyAtoi(str string) int {
 	return res
 
 }
+
+//IsPalindrome 判斷回文數
+func IsPalindrome(x int) bool {
+	if x < 0 {
+		return false
+	}
+	temp := x
+	var x2 int
+	for temp != 0 {
+		pop := temp % 10
+		//fmt.Println("pop", pop)
+		temp = temp / 10
+		//fmt.Println("temp", temp)
+		x2 = x2*10 + pop
+		//fmt.Println("x2", x2)
+		//fmt.Println("><><<<><<<><>")
+	}
+	if x2 == x {
+		return true
+	}
+	return false
+}
