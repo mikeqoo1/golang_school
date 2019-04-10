@@ -36,12 +36,13 @@ func main() {
 	C.TestChannel()
 	nums1 := []int{1, 2}
 	nums2 := []int{3, 4}
-	Q := L.FindMedianSortedArrays(nums1, nums2)
-	fmt.Println(Q)
-	P := L.Reverse(-123)
-	fmt.Println(P)
-	PP := L.MyAtoi(" -456")
-	fmt.Println(PP)
-	PPP := L.IsPalindrome(121)
-	fmt.Println(PPP)
+	ans1 := L.FindMedianSortedArrays(nums1, nums2)
+	fmt.Println(ans1)
+	ans2 := L.Reverse(-123)
+	fmt.Println(ans2)
+	ans3 := L.MyAtoi(" -456")
+	fmt.Println(ans3)
+	ans4 := L.IsPalindrome(121)
+	fmt.Println(ans4)
+	
 }
