@@ -44,5 +44,9 @@ func main() {
 	fmt.Println(ans3)
 	ans4 := L.IsPalindrome(121)
 	fmt.Println(ans4)
-	
+
+	// var nnn = "2019-04-23 11:42:31.90"
+	// fmt.Println(len(nnn))
+	// fmt.Println(nnn[11:22])
+	// fmt.Println(strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
 }
