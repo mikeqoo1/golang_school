@@ -3,6 +3,7 @@ package leetcode
 import (
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode/utf8"
@@ -326,11 +327,46 @@ func LongestCommonPrefix(strs []string) string {
 
 	//[aim air aimless]
 
-	prefix := strs[0] //把第一個給到前墜字串 aim
-	for i := 1; i < len(strs); i++ { //開始逐一訪問, 從1開始就好, 跳過自己 
+	prefix := strs[0]                //把第一個給到前墜字串 aim
+	for i := 1; i < len(strs); i++ { //開始逐一訪問, 從1開始就好, 跳過自己
 		for strings.HasPrefix(strs[i], prefix) == false { //當這個字串沒有找到時, (air, aim) = false
 			prefix = string([]rune(prefix)[:len(prefix)-1]) // aim 往前一位 prefix = ai, 繼續找, 直到true
 		}
 	}
 	return prefix
+}
+
+//ThreeSum LeetCodeNo15
+func ThreeSum(nums []int) [][]int {
+	//input: [-1,0,1,2,-1,-4]
+	ans := [][]int{}
+	sort.Ints(nums) //先排序,  [-4 -1 -1 0 1 2]
+	fmt.Println("排序後", nums)
+	for i := 0; i < len(nums); i++ {
+		if i > 0 && nums[i] == nums[i-1] { //過濾重複的 -1
+			continue
+		}
+		j, k := i+1, len(nums)-1 //一開始 i代表-4 j代表-1 k代表2, 固定i之後 接下來就類似2Sum
+		for j < k {
+			if j > i+1 && nums[j] == nums[j-1] {
+				j++
+				continue
+			}
+			if k < len(nums)-1 && nums[k] == nums[k+1] {
+				k--
+				continue
+			}
+			sum := nums[i] + nums[j] + nums[k]
+			if sum == 0 {
+				ans = append(ans, []int{nums[i], nums[j], nums[k]})
+				j++
+				k--
+			} else if sum < 0 {
+				j++
+			} else {
+				k--
+			}
+		}
+	}
+	return ans
 }
