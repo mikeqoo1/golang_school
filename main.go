@@ -8,6 +8,7 @@ import (
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
+	"strconv"
 )
 
 var pool *sql.DB
@@ -49,4 +50,9 @@ func main() {
 	// fmt.Println(len(nnn))
 	// fmt.Println(nnn[11:22])
 	// fmt.Println(strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
+	byteA := []byte{255, 255, 177, 224} //-20000
+	val, _ := B.BytesToIntS(byteA)
+	fmt.Println(val)
+	strint := strconv.FormatInt(int64(val), 10)
+	fmt.Println(strint)
 }
