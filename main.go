@@ -50,9 +50,16 @@ func main() {
 	// fmt.Println(len(nnn))
 	// fmt.Println(nnn[11:22])
 	// fmt.Println(strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
+
+
+	a := []int{-1, 0, 1, 2, -1, -4}
+	b := L.ThreeSum(a)
+	fmt.Println(b)
+
 	byteA := []byte{255, 255, 177, 224} //-20000
 	val, _ := B.BytesToIntS(byteA)
 	fmt.Println(val)
 	strint := strconv.FormatInt(int64(val), 10)
 	fmt.Println(strint)
+
 }
