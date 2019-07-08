@@ -370,3 +370,41 @@ func ThreeSum(nums []int) [][]int {
 	}
 	return ans
 }
+
+//ThreeSumClosest LeetCodeNo16
+//首先，對Array排序。
+//接著初始化一個整數變數。就是要return回去的答案。
+//訪問每一array中每一個數字。
+//每找一個數字，可以在array中找剩下的數字，這2個數字和現在的數字加起來應該樣在target附近。當騙尋结束，就得到结果。
+func ThreeSumClosest(nums []int, target int) int {
+	sort.Ints(nums)
+	var ret int
+	length := len(nums)
+	sum := nums[0] + nums[1] + nums[2]
+	ret = sum
+	diff := abs(sum - target)
+
+	for i := 0; i < length-2; i++ {
+		for j, k := i+1, length-1; j < k; {
+			sum = nums[i] + nums[j] + nums[k]
+			if sum-target < 0 {
+				j++
+			} else {
+				k--
+			}
+			if diff > abs(sum-target) {
+				ret = sum
+				diff = abs(sum - target)
+			}
+		}
+	}
+	return ret
+
+}
+
+func abs(in int) int {
+	if in < 0 {
+		return -in
+	}
+	return in
+}
