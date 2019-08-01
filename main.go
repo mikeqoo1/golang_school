@@ -51,7 +51,6 @@ func main() {
 	// fmt.Println(nnn[11:22])
 	// fmt.Println(strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
 
-
 	a := []int{-1, 0, 1, 2, -1, -4}
 	b := L.ThreeSum(a)
 	fmt.Println(b)
@@ -61,5 +60,7 @@ func main() {
 	fmt.Println(val)
 	strint := strconv.FormatInt(int64(val), 10)
 	fmt.Println(strint)
+
+	fmt.Println(L.LetterCombinations("56"))
 
 }
