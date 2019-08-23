@@ -1,5 +1,5 @@
 # 執行檔的名稱, 版本, 參數設定
-BINARY=GoTeach
+BINARY=GoTeach.out
 VERSION=1.0.0
 BUILD=`date +%FT%T%z`
 
