@@ -78,9 +78,10 @@ func main() {
 		fmt.Println(strint)
 	}
 
-	// var nnn = "2019-04-23 11:42:31.90"
-	// fmt.Println(len(nnn))
-	// fmt.Println(nnn[11:22])
-	// fmt.Println(strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
+	// var nnn = "2019-04-23 08:42:31.90"
+	// fmt.Println("時間:", nnn)
+	// fmt.Println("時間長度", len(nnn))
+	// fmt.Println("時間[11:22]", nnn[11:22])
+	// fmt.Println("時間轉換", strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
 
 }
