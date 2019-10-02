@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	D "golang_school/lib/db"
+	E "golang_school/lib/egg"
 	C "golang_school/lib/gochannels"
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
@@ -76,6 +77,17 @@ func main() {
 		fmt.Println(val)
 		strint := strconv.FormatInt(int64(val), 10)
 		fmt.Println(strint)
+
+		egg := E.NewWaterEgg()
+		egg.SetTestSyncMapValue("房東與貓", "往往")
+		a := egg.GetTestSyncMapValue("房東與貓")
+		fmt.Println(a.Name)
+		fmt.Println(a.Number)
+		a = egg.GetTestSyncMapValue("湖泊樂隊")
+		fmt.Println(a.Name)
+		fmt.Println(a.Number)
+
+		//var m sync.Map
 	}
 
 	// var nnn = "2019-04-23 08:42:31.90"
