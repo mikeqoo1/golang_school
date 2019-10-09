@@ -10,6 +10,8 @@ import (
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	"strconv"
+
+	"rsc.io/quote"
 )
 
 var (
@@ -32,6 +34,7 @@ func init() {
 func main() {
 	fmt.Println("Version: ", Version)
 	fmt.Println("Build time: ", Build)
+	fmt.Println("GOMod Test", quote.Hello())
 	if IsLeetCode == "TURE" {
 
 		fmt.Println("LeetcodeNo.3")
