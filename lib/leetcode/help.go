@@ -453,3 +453,71 @@ func LetterCombinations(digits string) []string {
 	return r
 
 }
+
+
+/*
+將array從小到大排列，雙重for loop，固定nums[i]和nums[j]，
+雙指針left和right分别為j+1，len(nums) - 1，
+令sum = nums[i] + nums[j] + nums[left] + nums[right]，
+因為sum要等於target，所以sum偏小時，left向左移動，sum偏大時，right向右移動，如果出現sum == target，存储该四元组组合
+*/
+//FourSum 4數之和
+func FourSum(nums []int, target int) [][]int {
+	count := len(nums)
+	sort.Ints(nums)
+	result := make([][]int, 0)
+	for i := 0; i < count-3; i++ {
+		//去掉重複的值
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+		//此時最小的sum都大於target，後面就不用查詢了
+		if nums[i]+nums[i+1]+nums[i+2]+nums[i+3] > target {
+			break
+		}
+		//nums[i]固定，最大的sum小於target，增大nums[i]繼續查詢
+		if nums[i]+nums[count-3]+nums[count-2]+nums[count-1] < target {
+			continue
+		}
+		for j := i + 1; j < count-2; j++ {
+			//去掉重複的值
+			if j > i+1 && nums[j] == nums[j-1] {
+				continue
+			}
+			//此時最小的sum都大於target，後面就不用查詢了
+			if nums[i]+nums[j]+nums[j+1]+nums[j+2] > target {
+				break
+			}
+			//nums[i]和nums[j]固定，最大的sum小於target，增大nums[j]繼續查詢
+			if nums[i]+nums[j]+nums[count-2]+nums[count-1] < target {
+				continue
+			}
+			left, right := j+1, count-1
+			for left < right {
+				//去掉重複的值
+				if left > j+1 && nums[left] == nums[left-1] {
+					left++
+					continue
+				}
+				//去掉重複的值
+				if right < count-1 && nums[right] == nums[right+1] {
+					right--
+					continue
+				}
+				sum := nums[i] + nums[j] + nums[left] + nums[right]
+				if sum == target {
+					temp := make([]int, 0)
+					temp = append(temp, nums[i], nums[j], nums[left], nums[right])
+					result = append(result, temp)
+					left++
+					right--
+				} else if sum < target {
+					left++
+				} else if sum > target {
+					right--
+				}
+			}
+		}
+	}
+	return result
+}
