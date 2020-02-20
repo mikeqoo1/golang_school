@@ -121,6 +121,8 @@ func main() {
 		fmt.Println(b)
 
 		fmt.Println(L.LetterCombinations("56"))
+
+		fmt.Println(L.FourSum(a, 0))
 	} else {
 		fmt.Println("時間格式")
 		A.TimetoFormat()
