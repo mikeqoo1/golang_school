@@ -454,7 +454,6 @@ func LetterCombinations(digits string) []string {
 
 }
 
-
 /*
 將array從小到大排列，雙重for loop，固定nums[i]和nums[j]，
 雙指針left和right分别為j+1，len(nums) - 1，
@@ -520,4 +519,39 @@ func FourSum(nums []int, target int) [][]int {
 		}
 	}
 	return result
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+/*
+[1,2,3,4,5] n=3等 輸出 [1,2,4,5], 從後面數來的第3個要消失
+宣告2個指標 都從頭開始
+當x走n步, 會指到4的地方
+接下來y也開始走, 不過不是n步, 而是x走到結尾的步數
+4->5 要走1步
+所以y也走1步到2的地方, 代表下一個元素3是不要的, 所以把2的下一個再指到下一個, 回傳
+
+4走1步到結尾       4->5
+2走3步到結尾 2->3->4->5
+代表3就是要刪掉的直,所以把2->->4
+
+*/
+//RemoveNthFromEnd leetcode19
+func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
+	x, y := head, head
+	for ; n > 0; n-- {
+		x = x.Next
+	}
+	if nil == x {
+		return head.Next
+	}
+	for nil != x.Next {
+		x = x.Next
+		y = y.Next
+	}
+	y.Next = y.Next.Next
+	return head
 }
