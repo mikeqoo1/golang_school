@@ -399,7 +399,6 @@ func ThreeSumClosest(nums []int, target int) int {
 		}
 	}
 	return ret
-
 }
 
 func abs(in int) int {
@@ -537,7 +536,6 @@ type ListNode struct {
 4走1步到結尾       4->5
 2走3步到結尾 2->3->4->5
 代表3就是要刪掉的直,所以把2->->4
-
 */
 //RemoveNthFromEnd leetcode19
 func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
@@ -554,4 +552,29 @@ func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
 	}
 	y.Next = y.Next.Next
 	return head
+}
+
+/*
+用stack來處理, 分成左右2邊
+1. 當前括號是左括號时，壓入stack。
+2. 當前括號是右括號时，stack的最上面如果不是對應的左括號，則為無效組合。否則，pop掉stack里的左括號。
+3. 所有字串都判斷處理過後，stack應該是空，否則則無效。
+*/
+//IsValid leetcode20
+func IsValid(s string) bool {
+	para := map[string]string{")": "(", "}": "{", "]": "["} //右邊當key, 左邊當value
+	stack := []string{}                                     //建立stack
+	for _, value := range s {                               //遍尋字串
+		key := string(value)
+		if _, ok := para[key]; !ok { //把字串的值,丟到map尋找對應的value
+			stack = append(stack, key) //(Push)
+		} else {
+			//stack[len(stack)-1] (Top element)
+			if len(stack) == 0 || stack[len(stack)-1] != para[key] {
+				return false
+			}
+			stack = stack[:len(stack)-1] //(Pop)
+		}
+	}
+	return len(stack) == 0
 }
