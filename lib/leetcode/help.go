@@ -9,6 +9,12 @@ import (
 	"unicode/utf8"
 )
 
+//ListNode linklist
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 //FindMedianSortedArrays 尋找中位數
 func FindMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	i, j := 0, 0
@@ -520,11 +526,6 @@ func FourSum(nums []int, target int) [][]int {
 	return result
 }
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 /*
 [1,2,3,4,5] n=3等 輸出 [1,2,4,5], 從後面數來的第3個要消失
 宣告2個指標 都從頭開始
@@ -577,4 +578,28 @@ func IsValid(s string) bool {
 		}
 	}
 	return len(stack) == 0
+}
+
+/*
+建一個新的ListNode, 接著 l1 和 l2 比大小, 小的先放
+最佳解法: 遞迴
+*/
+//MergeTwoLists leetcode21
+func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	if l1 == nil && l2 == nil {
+		return nil
+	}
+	if l1.Val < l2.Val {
+		l1.Next = MergeTwoLists(l1.Next, l2)
+		return l1
+	} else {
+		l2.Next = MergeTwoLists(l1, l2.Next)
+		return l2
+	}
 }
