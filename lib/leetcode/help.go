@@ -378,10 +378,10 @@ func ThreeSum(nums []int) [][]int {
 }
 
 //ThreeSumClosest LeetCodeNo16
-//首先，對Array排序。
+//首先, 對Array排序。
 //接著初始化一個整數變數。就是要return回去的答案。
 //訪問每一array中每一個數字。
-//每找一個數字，可以在array中找剩下的數字，這2個數字和現在的數字加起來應該樣在target附近。當騙尋结束，就得到结果。
+//每找一個數字, 可以在array中找剩下的數字, 這2個數字和現在的數字加起來應該樣在target附近。當騙尋结束, 就得到结果。
 func ThreeSumClosest(nums []int, target int) int {
 	sort.Ints(nums)
 	var ret int
@@ -460,10 +460,10 @@ func LetterCombinations(digits string) []string {
 }
 
 /*
-將array從小到大排列，雙重for loop，固定nums[i]和nums[j]，
-雙指針left和right分别為j+1，len(nums) - 1，
-令sum = nums[i] + nums[j] + nums[left] + nums[right]，
-因為sum要等於target，所以sum偏小時，left向左移動，sum偏大時，right向右移動，如果出現sum == target，存储该四元组组合
+將array從小到大排列, 雙重for loop, 固定nums[i]和nums[j],
+雙指針left和right分别為j+1, len(nums) - 1,
+令sum = nums[i] + nums[j] + nums[left] + nums[right],
+因為sum要等於target, 所以sum偏小時, left向左移動, sum偏大時, right向右移動, 如果出現sum == target, 存储该四元组组合
 */
 //FourSum 4數之和
 func FourSum(nums []int, target int) [][]int {
@@ -475,11 +475,11 @@ func FourSum(nums []int, target int) [][]int {
 		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		//此時最小的sum都大於target，後面就不用查詢了
+		//此時最小的sum都大於target, 後面就不用查詢了
 		if nums[i]+nums[i+1]+nums[i+2]+nums[i+3] > target {
 			break
 		}
-		//nums[i]固定，最大的sum小於target，增大nums[i]繼續查詢
+		//nums[i]固定, 最大的sum小於target, 增大nums[i]繼續查詢
 		if nums[i]+nums[count-3]+nums[count-2]+nums[count-1] < target {
 			continue
 		}
@@ -488,11 +488,11 @@ func FourSum(nums []int, target int) [][]int {
 			if j > i+1 && nums[j] == nums[j-1] {
 				continue
 			}
-			//此時最小的sum都大於target，後面就不用查詢了
+			//此時最小的sum都大於target, 後面就不用查詢了
 			if nums[i]+nums[j]+nums[j+1]+nums[j+2] > target {
 				break
 			}
-			//nums[i]和nums[j]固定，最大的sum小於target，增大nums[j]繼續查詢
+			//nums[i]和nums[j]固定, 最大的sum小於target, 增大nums[j]繼續查詢
 			if nums[i]+nums[j]+nums[count-2]+nums[count-1] < target {
 				continue
 			}
@@ -557,9 +557,9 @@ func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
 
 /*
 用stack來處理, 分成左右2邊
-1. 當前括號是左括號时，壓入stack。
-2. 當前括號是右括號时，stack的最上面如果不是對應的左括號，則為無效組合。否則，pop掉stack里的左括號。
-3. 所有字串都判斷處理過後，stack應該是空，否則則無效。
+1. 當前括號是左括號时, 壓入stack。
+2. 當前括號是右括號时, stack的最上面如果不是對應的左括號, 則為無效組合。否則, pop掉stack里的左括號。
+3. 所有字串都判斷處理過後, stack應該是空, 否則則無效。
 */
 //IsValid leetcode20
 func IsValid(s string) bool {
@@ -602,4 +602,61 @@ func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 		l2.Next = MergeTwoLists(l1, l2.Next)
 		return l2
 	}
+}
+
+/*
+第一步, 是得到n對括號的排列组合方式, 這個必需將左右括號分開排列组合,不然就只有一種
+這樣的話只需要通過遞迴的方式將n個左右括號排列组合的可能全部形成String值, 裝到List中即可
+第二步, 是得到有效的括號, 即先有一個左括號, 才能有一個右括號。所以將遞迴方法中的判斷條件
+*/
+//GenerateParenthesis leetcode22
+func GenerateParenthesis(n int) []string {
+	str := make([]string, 0)
+	position := make([]int, n*2) //第i個小標示示位置i上是左括號还是右括號，0表示左括號1表示右括號
+	placeParentheses(position, &str, 0, n)
+	return str
+}
+
+func placeParentheses(position []int, str *[]string, i, n int) {
+	if i == 2*n { //當所有的括號都放完了
+		var s string
+		for _, v := range position {
+			if v == 0 {
+				s += "("
+			} else {
+				s += ")"
+			}
+		}
+		*str = append(*str, s)
+		return
+	}
+	if isValid(position, i, 0, n) { //放左括號是否合法
+		position[i] = 0
+		placeParentheses(position, str, i+1, n)
+	}
+	if isValid(position, i, 1, n) { //放右括號是否合法
+		position[i] = 1
+		placeParentheses(position, str, i+1, n)
+	}
+}
+
+func isValid(position []int, cur int, LR int, n int) bool {
+	var num_left, num_right int
+	for i := 0; i < cur; i++ {
+		if position[i] == 0 {
+			num_left++
+		} else {
+			num_right++
+		}
+	}
+	if LR == 0 { //如果當前放入的是左括號
+		if num_left >= n {
+			return false
+		}
+	} else { //如果當前放入的是右括號
+		if num_left <= num_right {
+			return false
+		}
+	}
+	return true
 }
