@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"container/heap"
 	"fmt"
 	"math"
 	"sort"
@@ -13,6 +14,30 @@ import (
 type ListNode struct {
 	Val  int
 	Next *ListNode
+}
+
+type Queue []*ListNode
+
+func (h Queue) Less(i, j int) bool {
+	return h[i].Val < h[j].Val
+}
+
+func (h Queue) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+
+func (h Queue) Len() int {
+	return len(h)
+}
+
+func (h *Queue) Push(x interface{}) {
+	*h = append(*h, x.(*ListNode))
+}
+
+func (h *Queue) Pop() interface{} {
+	head := (*h)[len(*h)-1]
+	*h = (*h)[:len(*h)-1]
+	return head
 }
 
 //FindMedianSortedArrays 尋找中位數
@@ -665,12 +690,30 @@ func isValid(position []int, cur int, LR int, n int) bool {
 /*
 先排序List,再合併
 有幾種方法
-法1 把K個list, 變成leetcode21的問題 做(k-1)次的合併
-法2 沿用法1,但是進行優化, 將K個List,
-将 \text{k}k 个链表配对并将同一对中的链表合并。
+法1 把K個list, 變成leetcode21的問題,需要不停的合併, 產生2個list, 需要(k-1)次的合併
+法2 沿用法1,但是進行優化, 將K個List, 配對並將同一對中的list合併 重複這一個動作, 就好了
+法3 優先佇列, 先把list上的所有值放進優先佇列生成最小堆, 然后最小堆直接poll就可以了
+heap里面存k個(length), 一共n個數, while n次, 每次poll時間複雜度logk, 所以總時間複雜度nlogk
+
 */
 func MergeKLists(lists []*ListNode) *ListNode {
-	//法1
+	//法1 法2 快速精簡版
+	// if lists == nil || len(lists) == 0 {
+	// 	return nil
+	// }
+
+	// for len(lists) > 1 {
+	// 	// pop 2 lists
+	// 	l1 := lists[0]
+	// 	l2 := lists[1]
+	// 	lists = lists[2:]
+
+	// 	merged := MergeTwoLists(l1, l2)
+	// 	lists = append(lists, merged)
+	// }
+
+	// return lists[0]
+	//法2
 	// if len(lists) == 0 {
 	// 	return nil
 	// }
@@ -684,5 +727,25 @@ func MergeKLists(lists []*ListNode) *ListNode {
 	// }
 	// return lists[0]
 
-
+	//法3
+	if len(lists) == 0 {
+		return nil
+	}
+	q := new(Queue)
+	for _, node := range lists {
+		if node != nil {
+			heap.Push(q, node)
+		}
+	}
+	res := new(ListNode)
+	head := res
+	for q.Len() > 0 {
+		node := heap.Pop(q).(*ListNode)
+		head.Next = node
+		head = head.Next
+		if node.Next != nil {
+			heap.Push(q, node.Next)
+		}
+	}
+	return res.Next
 }
