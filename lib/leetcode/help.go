@@ -660,3 +660,29 @@ func isValid(position []int, cur int, LR int, n int) bool {
 	}
 	return true
 }
+
+//MergeKLists leetcode23
+/*
+先排序List,再合併
+有幾種方法
+法1 把K個list, 變成leetcode21的問題 做(k-1)次的合併
+法2 沿用法1,但是進行優化, 將K個List,
+将 \text{k}k 个链表配对并将同一对中的链表合并。
+*/
+func MergeKLists(lists []*ListNode) *ListNode {
+	//法1
+	// if len(lists) == 0 {
+	// 	return nil
+	// }
+	// begin, end := 0, len(lists)-1
+	// for begin < end {
+	// 	mid := (begin + end - 1) / 2
+	// 	for i := 0; i <= mid; i++ {
+	// 		lists[i] = MergeTwoLists(lists[i], lists[end-i])
+	// 	}
+	// 	end = (begin + end) / 2
+	// }
+	// return lists[0]
+
+
+}
