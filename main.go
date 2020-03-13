@@ -123,6 +123,33 @@ func main() {
 		fmt.Println(L.LetterCombinations("56"))
 
 		fmt.Println(L.FourSum(a, 0))
+		fmt.Println(L.IsValid("{[]}"))
+		//ListNode
+		fmt.Println("ListNode 相關")
+		var l1 L.ListNode
+		l1.Val = 1
+		l1.Next = new(L.ListNode)
+		fmt.Println("1.", l1)
+
+		l1.Next.Val = 2
+		l1.Next.Next = new(L.ListNode)
+		fmt.Println("2.", l1.Next)
+
+		l1.Next.Next.Val = 3
+		l1.Next.Next.Next = new(L.ListNode)
+		fmt.Println("3.", l1.Next.Next)
+
+		l1.Next.Next.Next.Val = 4
+		l1.Next.Next.Next.Next = new(L.ListNode)
+		fmt.Println("4.", l1.Next.Next.Next)
+
+		l1.Next.Next.Next.Next.Val = 5
+		fmt.Println("5.", l1.Next.Next.Next.Next)
+
+		fmt.Println("原本l1", l1, l1.Next, l1.Next.Next, l1.Next.Next.Next, l1.Next.Next.Next.Next)
+		fmt.Println("leetcode 19")
+		l5 := L.RemoveNthFromEnd(&l1, 2)
+		fmt.Println("過了leetcode 19 list", l5, l5.Next, l5.Next.Next, l5.Next.Next.Next, l5.Next.Next.Next.Next)
 	} else {
 		fmt.Println("時間格式")
 		A.TimetoFormat()
@@ -149,17 +176,15 @@ func main() {
 		fmt.Println(a.Number)
 		a = egg.GetTestSyncMapValue("湖泊樂隊")
 		fmt.Println(a.Name)
-		fmt.Println(a.Number)
+
+		//var, nnn, =, "2019-04-23, 08:42:31.90"
+		//fmt.Println("時間:", nnn)
+		//fmt.Println("時間長度", len(nnn))
+		//fmt.Println("時間[11:22]", nnn[11:22])
+		//fmt.Println("時間轉換", strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
+
+		//切包測試
+		originalsdata := []byte{170, 2, 50, 84, 50, 48, 2, 255, 48, 49, 51, 51, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 130, 0, 0, 0, 55, 93, 240, 173, 10, 2, 23, 102, 1, 4, 1, 249, 0, 52, 1, 4, 1, 4, 65, 48, 48, 55, 49, 0, 0, 0, 44, 48, 48, 48, 48, 48, 49, 50, 49, 2, 84, 88, 70, 76, 57, 47, 65, 48, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 255, 255, 244, 72, 0, 3, 0, 150, 50, 124, 49, 1, 2, 0, 79, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 237, 64, 0, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 240, 172, 214, 1, 142, 93, 240, 173, 10, 2, 23, 4, 0, 0, 5, 218, 0, 0, 0, 55, 1, 146, 10}
+		Kobe = MambaMentality(originalsdata)
 	}
-
-	//var, nnn, =, "2019-04-23, 08:42:31.90"
-	//fmt.Println("時間:", nnn)
-	//fmt.Println("時間長度", len(nnn))
-	//fmt.Println("時間[11:22]", nnn[11:22])
-	//fmt.Println("時間轉換", strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
-
-	//切包測試
-	originalsdata := []byte{170, 2, 50, 84, 50, 48, 2, 255, 48, 49, 51, 51, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 130, 0, 0, 0, 55, 93, 240, 173, 10, 2, 23, 102, 1, 4, 1, 249, 0, 52, 1, 4, 1, 4, 65, 48, 48, 55, 49, 0, 0, 0, 44, 48, 48, 48, 48, 48, 49, 50, 49, 2, 84, 88, 70, 76, 57, 47, 65, 48, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 255, 255, 244, 72, 0, 3, 0, 150, 50, 124, 49, 1, 2, 0, 79, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 237, 64, 0, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 240, 172, 214, 1, 142, 93, 240, 173, 10, 2, 23, 4, 0, 0, 5, 218, 0, 0, 0, 55, 1, 146, 10}
-	Kobe = MambaMentality(originalsdata)
-
 }

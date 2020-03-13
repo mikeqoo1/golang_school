@@ -217,40 +217,38 @@ func RegularExpressionMatching(s string, p string) bool {
 	}
 
 	return len(s) <= 0
-
-	/*快速版
-		n, m := len(s), len(p)
-	    dp := make([][]bool, n+1)
-	    for i:=0;i<=n;i++ {
-	        dp[i] = make([]bool, m+1)
-	    }
-	    dp[0][0] = true
-	    for j:=2; j<=m; j++ {
-	        if p[j-1] == '*' {
-	            dp[0][j] = dp[0][j-2]
-	        }
-	    }
-	    // fmt.Printf("%#v\n",dp[0])
-	    for i:=1; i<=n; i++ {
-	        for j:=1; j<=m; j++ {
-	            if s[i-1] == p[j-1] || p[j-1] == '.' {
-	                dp[i][j] = dp[i-1][j-1]
-	                continue
-	            }
-	            if p[j-1] == '*' {
-	                if p[j-2] != '.' && p[j-2] != s[i-1] {
-	                    dp[i][j] = dp[i][j-2]
-	                } else {
-	                    dp[i][j] = dp[i][j-2] || dp[i-1][j]
-	                }
-	            }
-	        }
-	    }
-	    // for _, r := range dp{
-	    //     fmt.Printf("%v\n",r)
-	    // }
-		return dp[n][m]
-	*/
+	//快速版
+	// n, m := len(s), len(p)
+	// dp := make([][]bool, n+1)
+	// for i:=0;i<=n;i++ {
+	//     dp[i] = make([]bool, m+1)
+	// }
+	// dp[0][0] = true
+	// for j:=2; j<=m; j++ {
+	//     if p[j-1] == '*' {
+	//         dp[0][j] = dp[0][j-2]
+	//     }
+	// }
+	// // fmt.Printf("%#v\n",dp[0])
+	// for i:=1; i<=n; i++ {
+	//     for j:=1; j<=m; j++ {
+	//         if s[i-1] == p[j-1] || p[j-1] == '.' {
+	//             dp[i][j] = dp[i-1][j-1]
+	//             continue
+	//         }
+	//         if p[j-1] == '*' {
+	//             if p[j-2] != '.' && p[j-2] != s[i-1] {
+	//                 dp[i][j] = dp[i][j-2]
+	//             } else {
+	//                 dp[i][j] = dp[i][j-2] || dp[i-1][j]
+	//             }
+	//         }
+	//     }
+	// }
+	// // for _, r := range dp{
+	// //     fmt.Printf("%v\n",r)
+	// // }
+	// return dp[n][m]
 }
 
 //MaxArea leetCode11
@@ -484,13 +482,12 @@ func LetterCombinations(digits string) []string {
 
 }
 
-/*
+/*FourSum 4數之和
 將array從小到大排列, 雙重for loop, 固定nums[i]和nums[j],
 雙指針left和right分别為j+1, len(nums) - 1,
 令sum = nums[i] + nums[j] + nums[left] + nums[right],
 因為sum要等於target, 所以sum偏小時, left向左移動, sum偏大時, right向右移動, 如果出現sum == target, 存储该四元组组合
 */
-//FourSum 4數之和
 func FourSum(nums []int, target int) [][]int {
 	count := len(nums)
 	sort.Ints(nums)
@@ -551,7 +548,7 @@ func FourSum(nums []int, target int) [][]int {
 	return result
 }
 
-/*
+/*RemoveNthFromEnd leetcode19
 [1,2,3,4,5] n=3等 輸出 [1,2,4,5], 從後面數來的第3個要消失
 宣告2個指標 都從頭開始
 當x走n步, 會指到4的地方
@@ -563,7 +560,6 @@ func FourSum(nums []int, target int) [][]int {
 2走3步到結尾 2->3->4->5
 代表3就是要刪掉的直,所以把2->->4
 */
-//RemoveNthFromEnd leetcode19
 func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
 	x, y := head, head
 	for ; n > 0; n-- {
@@ -580,13 +576,12 @@ func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
 	return head
 }
 
-/*
+/*IsValid leetcode20
 用stack來處理, 分成左右2邊
 1. 當前括號是左括號时, 壓入stack。
 2. 當前括號是右括號时, stack的最上面如果不是對應的左括號, 則為無效組合。否則, pop掉stack里的左括號。
 3. 所有字串都判斷處理過後, stack應該是空, 否則則無效。
 */
-//IsValid leetcode20
 func IsValid(s string) bool {
 	para := map[string]string{")": "(", "}": "{", "]": "["} //右邊當key, 左邊當value
 	stack := []string{}                                     //建立stack
@@ -605,11 +600,10 @@ func IsValid(s string) bool {
 	return len(stack) == 0
 }
 
-/*
+/*MergeTwoLists leetcode21
 建一個新的ListNode, 接著 l1 和 l2 比大小, 小的先放
 最佳解法: 遞迴
 */
-//MergeTwoLists leetcode21
 func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil {
 		return l2
@@ -629,12 +623,11 @@ func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 }
 
-/*
+/*GenerateParenthesis leetcode22
 第一步, 是得到n對括號的排列组合方式, 這個必需將左右括號分開排列组合,不然就只有一種
 這樣的話只需要通過遞迴的方式將n個左右括號排列组合的可能全部形成String值, 裝到List中即可
 第二步, 是得到有效的括號, 即先有一個左括號, 才能有一個右括號。所以將遞迴方法中的判斷條件
 */
-//GenerateParenthesis leetcode22
 func GenerateParenthesis(n int) []string {
 	str := make([]string, 0)
 	position := make([]int, n*2) //第i個小標示示位置i上是左括號还是右括號，0表示左括號1表示右括號
@@ -686,15 +679,13 @@ func isValid(position []int, cur int, LR int, n int) bool {
 	return true
 }
 
-//MergeKLists leetcode23
-/*
+/*MergeKLists leetcode23
 先排序List,再合併
 有幾種方法
 法1 把K個list, 變成leetcode21的問題,需要不停的合併, 產生2個list, 需要(k-1)次的合併
 法2 沿用法1,但是進行優化, 將K個List, 配對並將同一對中的list合併 重複這一個動作, 就好了
 法3 優先佇列, 先把list上的所有值放進優先佇列生成最小堆, 然后最小堆直接poll就可以了
 heap里面存k個(length), 一共n個數, while n次, 每次poll時間複雜度logk, 所以總時間複雜度nlogk
-
 */
 func MergeKLists(lists []*ListNode) *ListNode {
 	//法1 法2 快速精簡版
@@ -748,4 +739,28 @@ func MergeKLists(lists []*ListNode) *ListNode {
 		}
 	}
 	return res.Next
+}
+
+/*SwapPairs leetcode24
+交換
+*/
+func SwapPairs(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+
+	node := head
+	next := node.Next
+
+	for (node != nil) && (next != nil) {
+		node.Val, next.Val = next.Val, node.Val
+		node = next.Next
+		if (node == nil) || (node.Next == nil) {
+			break
+		} else {
+			next = node.Next
+		}
+	}
+
+	return head
 }
