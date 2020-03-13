@@ -742,8 +742,8 @@ func MergeKLists(lists []*ListNode) *ListNode {
 }
 
 /*SwapPairs leetcode24
-
- */
+交換
+*/
 func SwapPairs(head *ListNode) *ListNode {
 	if head == nil {
 		return head
