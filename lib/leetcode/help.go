@@ -764,3 +764,37 @@ func SwapPairs(head *ListNode) *ListNode {
 
 	return head
 }
+
+/*ReverseKGroup leetcode 25
+通過两個指標指向一個group的頭和尾, 然後對這個group做reverse操作,如果這兩個指標間的距離小於k，不進行動作
+*/
+func ReverseKGroup(head *ListNode, k int) *ListNode {
+	var pre, next *ListNode
+	var cur, p *ListNode = head, head
+	groupSize, index := 0, 0
+	// linkList前k個節點组成一组
+	for p != nil && groupSize < k {
+		p = p.Next
+		groupSize++
+	}
+	if groupSize == k {
+		// 翻轉k個節點组成的子linklist
+		for cur != nil && index < k {
+			next = cur.Next
+			cur.Next = pre
+			pre = cur
+			cur = next
+			index++
+		}
+		// 繼續遞迴執行上面的步驟
+		if next != nil {
+			// head指向子linklist翻轉後的尾巴
+			head.Next = ReverseKGroup(next, k)
+		}
+		// pre紀錄子linklist翻轉後的開頭
+		return pre
+	}
+	// 子linklist長度不足k，不翻轉
+	return head
+
+}
