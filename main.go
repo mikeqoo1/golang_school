@@ -150,6 +150,26 @@ func main() {
 		fmt.Println("leetcode 19")
 		l5 := L.RemoveNthFromEnd(&l1, 2)
 		fmt.Println("過了leetcode 19 list", l5, l5.Next, l5.Next.Next, l5.Next.Next.Next, l5.Next.Next.Next.Next)
+
+		numberarray := []int{1, 2, 3, 4, 5, 6, 7, 8}
+		lkk := &L.ListNode{Val: numberarray[0], Next: nil}
+		p := lkk
+		for _, r := range numberarray[1:] {
+			node := &L.ListNode{Val: r, Next: nil}
+			p.Next = node
+			p = p.Next
+		}
+		k := 3
+		res := L.ReverseKGroup(lkk, k)
+		for res != nil {
+			if res.Next != nil {
+				fmt.Printf("%d->", res.Val)
+			} else {
+				fmt.Printf("%d", res.Val)
+			}
+			res = res.Next
+		}
+
 	} else {
 		fmt.Println("時間格式")
 		A.TimetoFormat()
