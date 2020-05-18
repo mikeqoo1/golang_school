@@ -798,3 +798,22 @@ func ReverseKGroup(head *ListNode, k int) *ListNode {
 	return head
 
 }
+
+/*RemoveDuplicates leetcode 26
+給一個排序好的陣列(array)，消除其中重複的數字，然後回傳新的陣列的長度。不允許建立新的陣列。必須透過回傳一個固定的數字，來表示陣列的長度。
+*/
+func RemoveDuplicates(nums []int) int {
+	Lnums := len(nums)
+	if Lnums <= 1 {
+		return Lnums
+	}
+
+	i := 1
+	for j := i; j < Lnums; j++ {
+		if nums[i-1] != nums[j] {
+			nums[i] = nums[j]
+			i++
+		}
+	}
+	return i
+}

@@ -169,7 +169,7 @@ func main() {
 			}
 			res = res.Next
 		}
-
+		L.RemoveDuplicates(a)
 	} else {
 		fmt.Println("時間格式")
 		A.TimetoFormat()
