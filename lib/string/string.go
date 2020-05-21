@@ -9,9 +9,10 @@ import (
 	"unicode/utf8"
 )
 
+//Test Json範例
 type Test struct {
-	Name string
-	Age  int
+	Name string `json:"name"`
+	Age  int    `json:"age"`
 }
 
 //PadLeft 左邊補齊
@@ -90,8 +91,8 @@ func GoRUNS() {
 	//rune 等於int32, 大致用来處理unicode或utf-8字串
 }
 
-//TestJsonToStruct json轉stuct
-func TestJsonToStruct() {
+//TestJSONToStruct json轉stuct
+func TestJSONToStruct() {
 	jsonStr := `{"name": "sky","age": 20}`
 	fmt.Println("json 格式:", jsonStr)
 
@@ -100,8 +101,8 @@ func TestJsonToStruct() {
 	fmt.Println("轉 Struct 格式:", a)
 }
 
-//TestStructToJson stuct轉json
-func TestStructToJson() {
+//TestStructToJSON stuct轉json
+func TestStructToJSON() {
 	var a Test
 	a.Name = "mike"
 	a.Age = 24

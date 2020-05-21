@@ -178,9 +178,9 @@ func main() {
 		B.PadLeft("123", 5, "0")
 		B.PadRight("123", 5, "0")
 		fmt.Println("Json格式轉換Struct")
-		B.TestJsonToStruct()
+		B.TestJSONToStruct()
 		fmt.Println("Struct轉換Json格式")
-		B.TestStructToJson()
+		B.TestStructToJSON()
 		fmt.Println("Goroutine")
 		C.TestChannel()
 		byteA := []byte{255, 255, 177, 224} //-20000
