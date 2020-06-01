@@ -7,12 +7,14 @@ import (
 	D "golang_school/lib/db"
 	E "golang_school/lib/egg"
 	S "golang_school/lib/email"
+	F "golang_school/lib/file"
 	C "golang_school/lib/gochannels"
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	"strconv"
 
+	"go.uber.org/zap"
 	"rsc.io/quote"
 )
 
@@ -31,6 +33,8 @@ var (
 
 func init() {
 	pool = D.InitDB()
+	F.InitLog()
+	F.LOG.Info("log 初始化成功")
 }
 
 //MambaOut R.I.P #24 #8
@@ -93,9 +97,14 @@ func MambaMentality(originalsdata []byte) MambaOut {
 }
 
 func main() {
-	fmt.Println("Version: ", Version)
-	fmt.Println("Build time: ", Build)
-	fmt.Println("GOMod Test", quote.Hello())
+	// F.LOG.Info("星夜裡的人",
+	// 	zap.String("url", "https://www.youtube.com/watch?v=RnsVmZDQaJA"),
+	// 	zap.Int("時間", 3),
+	// 	zap.Duration("backoff", time.Second),
+	// )
+	F.LOG.Info("星夜裡的人", zap.String("Version: ", Version))
+	F.LOG.Info("星夜裡的人", zap.String("Build time: ", Build))
+	F.LOG.Info("星夜裡的人", zap.String("GOMod Test", quote.Hello()))
 	if IsLeetCode == "TURE" {
 		fmt.Println("LeetcodeNo.3")
 		fmt.Println(B.LengthOfLongestSubstring("aab"))
