@@ -817,3 +817,17 @@ func RemoveDuplicates(nums []int) int {
 	}
 	return i
 }
+
+/*RemoveElement leetcode 27
+消除陣列中相同的數值, 回傳消除後的長度
+*/
+func RemoveElement(nums []int, val int) int {
+	a := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != val {
+			nums[a] = nums[i]
+			a++
+		}
+	}
+	return a
+}
