@@ -6,6 +6,7 @@ import (
 	"fmt"
 	D "golang_school/lib/db"
 	E "golang_school/lib/egg"
+	S "golang_school/lib/email"
 	C "golang_school/lib/gochannels"
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
@@ -171,6 +172,7 @@ func main() {
 		}
 		L.RemoveDuplicates(a)
 	} else {
+		S.SendEmail()
 		fmt.Println("時間格式")
 		A.TimetoFormat()
 		//A.SubDay()
