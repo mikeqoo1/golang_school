@@ -35,8 +35,8 @@ func InitLog() {
 		Development:      true,
 		Encoding:         "json", // 輸出格式 console 或 json
 		EncoderConfig:    encoderConfig,
-		InitialFields:    map[string]interface{}{"『』": "【123】"}, // 初始化字段
-		OutputPaths:      []string{"stdout", "test.log"},        // 輸出文件 stdout stderr
+		InitialFields:    map[string]interface{}{"Key值": "內容"}, // 初始化字段
+		OutputPaths:      []string{"stdout", "test.log"},       // 輸出文件 stdout stderr
 		ErrorOutputPaths: []string{"stderr", "error.log"},
 	}
 
