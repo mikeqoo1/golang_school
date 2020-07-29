@@ -34,13 +34,18 @@ make就只跑原本的小功能, 不跑LeetCode
 
 查看所有升级lib版本 指令 ```go list -u -m all```
 
-升级下一個版本或補釘版本 指令 ```go get -u rsc.io/quote```
+升級下一個版本或補釘版本 指令 ```go get -u rsc.io/quote```
 
-只升级補釘版本 指令 ```go get -u=patch rscio/quote```
+只升級補丁版本 指令 ```go get -u=patch rscio/quote```
 
 升降版本，可以使用比較運算來處理 指令 ```go get lib@'<v1.6.2'```
 
 程式碼中沒用的到lib, 自動移出gomod 指令 ```go mod tidy```
 
-詳細請參考 - 开始使用 Go Module - isLishude的文章 - 知乎
+詳細請參考 - 開始使用 Go Module - isLishude的文章 - 知乎
 https://zhuanlan.zhihu.com/p/59687626
+
+## 面試題
+
+golang的垃圾回收機制
+

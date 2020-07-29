@@ -6,13 +6,13 @@ import (
 	"fmt"
 	D "golang_school/lib/db"
 	E "golang_school/lib/egg"
-	S "golang_school/lib/email"
 	F "golang_school/lib/file"
 	C "golang_school/lib/gochannels"
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	"strconv"
+	"strings"
 
 	"go.uber.org/zap"
 	"rsc.io/quote"
@@ -181,7 +181,7 @@ func main() {
 		}
 		L.RemoveDuplicates(a)
 	} else {
-		S.SendEmail()
+		//S.SendEmail()
 		fmt.Println("時間格式")
 		A.TimetoFormat()
 		//A.SubDay()
@@ -207,15 +207,10 @@ func main() {
 		fmt.Println(a.Number)
 		a = egg.GetTestSyncMapValue("湖泊樂隊")
 		fmt.Println(a.Name)
-
-		//var, nnn, =, "2019-04-23, 08:42:31.90"
-		//fmt.Println("時間:", nnn)
-		//fmt.Println("時間長度", len(nnn))
-		//fmt.Println("時間[11:22]", nnn[11:22])
-		//fmt.Println("時間轉換", strings.Replace(strings.Replace(nnn[11:22], ".", "", 1), ":", "", 2))
-
 		//切包測試
 		originalsdata := []byte{170, 2, 50, 84, 50, 48, 2, 255, 48, 49, 51, 51, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 130, 0, 0, 0, 55, 93, 240, 173, 10, 2, 23, 102, 1, 4, 1, 249, 0, 52, 1, 4, 1, 4, 65, 48, 48, 55, 49, 0, 0, 0, 44, 48, 48, 48, 48, 48, 49, 50, 49, 2, 84, 88, 70, 76, 57, 47, 65, 48, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 255, 255, 244, 72, 0, 3, 0, 150, 50, 124, 49, 1, 2, 0, 79, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 237, 64, 0, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 240, 172, 214, 1, 142, 93, 240, 173, 10, 2, 23, 4, 0, 0, 5, 218, 0, 0, 0, 55, 1, 146, 10}
 		Kobe = MambaMentality(originalsdata)
+
+		//面試題
 	}
 }
