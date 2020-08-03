@@ -12,7 +12,6 @@ import (
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	"strconv"
-	"strings"
 
 	"go.uber.org/zap"
 	"rsc.io/quote"
@@ -212,5 +211,10 @@ func main() {
 		Kobe = MambaMentality(originalsdata)
 
 		//面試題
+		defer func() { fmt.Println("打印前") }()
+		defer func() { fmt.Println("打印中") }()
+		defer func() { fmt.Println("打印後") }()
+
+		panic("觸發異常")
 	}
 }

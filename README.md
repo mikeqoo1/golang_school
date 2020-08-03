@@ -47,5 +47,17 @@ https://zhuanlan.zhihu.com/p/59687626
 
 ## 面試題
 
-golang的垃圾回收機制
+golang的垃圾回收機制 (Garbage Collection)
+引用計數 (reference counting)
+
+標記-清除法 (mark and sweep)
+
+STW (stop the world)
+
+GC觸發條件
+
+超過内存大小阈值
+达到定时时间
+阈值是由一个gcpercent的变量控制的,当新分配的内存占已在使用中的内存的比例超过gcprecent时就会触发。比如一次回收完毕后，内存的使用量为5M，那么下次回收的时机则是内存分配达到10M的时候。也就是说，并不是内存分配越多，垃圾回收频率越高。
+如果一直达不到内存大小的阈值呢？这个时候GC就会被定时时间触发，比如一直达不到10M，那就定时（默认2min触发一次）触发一次GC保证资源的回收。
 
