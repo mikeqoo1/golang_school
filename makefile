@@ -7,7 +7,11 @@ ifeq ($(leetcode),1)
 IsLeetCode=TURE
 endif
 
-LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD} -X main.IsLeetCode=${IsLeetCode}"
+ifeq ($(other),1)
+IsOther=TURE
+endif
+
+LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD} -X main.IsLeetCode=${IsLeetCode} -X main.IsOther=${IsOther}"
 # 預設標籤: 編譯程式
 build:
 	go build ${LDFLAGS} -o ${BINARY}
