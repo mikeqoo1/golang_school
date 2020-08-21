@@ -113,9 +113,9 @@ func main() {
 	// 	zap.Int("時間", 3),
 	// 	zap.Duration("backoff", time.Second),
 	// )
-	F.LOG.Info("星夜裡的人", zap.String("Version: ", Version))
-	F.LOG.Info("星夜裡的人", zap.String("Build time: ", Build))
-	F.LOG.Info("星夜裡的人", zap.String("GOMod Test", quote.Hello()))
+	F.LOG.Info("Log訊息", zap.String("Version: ", Version))
+	F.LOG.Info("編譯時間", zap.String("Build time: ", Build))
+	F.LOG.Info("GoMod", zap.String("GOMod Test", quote.Hello()))
 	if IsLeetCode == "TURE" {
 		fmt.Println("LeetcodeNo.3")
 		fmt.Println(B.LengthOfLongestSubstring("aab"))
