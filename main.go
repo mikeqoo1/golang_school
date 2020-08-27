@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"database/sql"
 	"fmt"
 	D "golang_school/lib/db"
@@ -12,6 +13,7 @@ import (
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	"strconv"
+	"time"
 
 	"go.uber.org/zap"
 	"rsc.io/quote"
@@ -223,10 +225,30 @@ func main() {
 		Kobe = MambaMentality(originalsdata)
 	} else {
 		//面試題
+
+		//用goroutine 實作 1加到100
+		var res = make(chan int)
+		var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+		go calcSum(arr[:5], res)
+		go calcSum(arr[5:], res)
+		sum := <-res
+		sum += <-res
+		fmt.Println("sum =", sum)
+
+		ctx, cancel := context.WithCancel(context.Background())
+		go watch(ctx, "【監控1】")
+		go watch(ctx, "【監控2】")
+		go watch(ctx, "【監控3】")
+
+		time.Sleep(10 * time.Second)
+		fmt.Println("可以了，通知監控停止")
+		cancel()
+		//為了檢測監控過是否停止，如果没有監控輸出，就表示停止了
+		time.Sleep(5 * time.Second)
+
 		defer func() { fmt.Println("打印前") }()
 		defer func() { fmt.Println("打印中") }()
 		defer func() { fmt.Println("打印後") }()
-
 		panic("觸發異常")
 		/* 結果
 		打印後
@@ -235,16 +257,18 @@ func main() {
 		panic: 觸發異常
 		*/
 
-		//用goroutine 實作 1加到100
-		var res = make(chan int)
-		var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	}
+}
 
-		go calcSum(arr[:5], res)
-		go calcSum(arr[5:], res)
-
-		sum := <-res
-		sum += <-res
-
-		fmt.Println("sum =", sum)
+func watch(ctx context.Context, name string) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println(name, "監控退出，停止了...")
+			return
+		default:
+			fmt.Println(name, "goroutine監控中...")
+			time.Sleep(2 * time.Second)
+		}
 	}
 }
