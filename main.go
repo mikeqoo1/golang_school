@@ -16,7 +16,6 @@ import (
 	"time"
 
 	"go.uber.org/zap"
-	"rsc.io/quote"
 )
 
 var (
@@ -31,6 +30,9 @@ var (
 
 	//IsOther 其他項目的程式
 	IsOther string
+
+	//IsInterview 面試題
+	IsInterview string
 
 	pool *sql.DB
 )
@@ -115,9 +117,9 @@ func main() {
 	// 	zap.Int("時間", 3),
 	// 	zap.Duration("backoff", time.Second),
 	// )
-	F.LOG.Info("Log訊息", zap.String("Version: ", Version))
-	F.LOG.Info("編譯時間", zap.String("Build time: ", Build))
-	F.LOG.Info("GoMod", zap.String("GOMod Test", quote.Hello()))
+	F.LOG.Info(" ", zap.String("Version: ", Version))
+	F.LOG.Info(" ", zap.String("Build time: ", Build))
+	F.LOG.Info("GoMod")
 	if IsLeetCode == "TURE" {
 		fmt.Println("LeetcodeNo.3")
 		fmt.Println(B.LengthOfLongestSubstring("aab"))
@@ -223,7 +225,7 @@ func main() {
 		//切包測試
 		originalsdata := []byte{170, 2, 50, 84, 50, 48, 2, 255, 48, 49, 51, 51, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 130, 0, 0, 0, 55, 93, 240, 173, 10, 2, 23, 102, 1, 4, 1, 249, 0, 52, 1, 4, 1, 4, 65, 48, 48, 55, 49, 0, 0, 0, 44, 48, 48, 48, 48, 48, 49, 50, 49, 2, 84, 88, 70, 76, 57, 47, 65, 48, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 255, 255, 244, 72, 0, 3, 0, 150, 50, 124, 49, 1, 2, 0, 79, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 237, 64, 0, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 240, 172, 214, 1, 142, 93, 240, 173, 10, 2, 23, 4, 0, 0, 5, 218, 0, 0, 0, 55, 1, 146, 10}
 		Kobe = MambaMentality(originalsdata)
-	} else {
+	} else if IsInterview == "TURE" {
 		//面試題
 
 		//用goroutine 實作 1加到100
@@ -256,8 +258,12 @@ func main() {
 		打印前
 		panic: 觸發異常
 		*/
-
+	} else {
+		//https://docs.nats.io/
+		//待補
 	}
+
+	fmt.Println("Hello Word!")
 }
 
 func watch(ctx context.Context, name string) {
