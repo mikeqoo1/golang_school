@@ -55,3 +55,26 @@ func TimetoFormat() {
 	//CCC := t.Second()
 	p("AAA =", sad)
 }
+
+//TimeCmp 比較時間
+func TimeCmp() {
+	現在時間 := time.Now()
+	中午 := "12:00PM"
+	晚上 := "12:00AM"
+	fmt.Println(現在時間.Format(time.Kitchen))
+	nowtimestr, err := time.Parse(time.Kitchen, 現在時間.Format(time.Kitchen))
+	noontimestr, _ := time.Parse(time.Kitchen, 中午)
+	nighttimestr, _ := time.Parse(time.Kitchen, 晚上)
+	fmt.Println("現在時間=", nowtimestr)
+	fmt.Println("中午=", noontimestr)
+	fmt.Println("晚上=", nighttimestr)
+	if err == nil && nowtimestr.After(noontimestr) {
+		fmt.Println("現在時間 > 中午")
+	} else if nowtimestr.After(nighttimestr) {
+		fmt.Println("現在時間 > 晚上")
+	} else if nowtimestr.Before(noontimestr) {
+		fmt.Println("現在時間 < 中午")
+	} else if nowtimestr.Before(nighttimestr) {
+		fmt.Println("現在時間 < 晚上")
+	}
+}

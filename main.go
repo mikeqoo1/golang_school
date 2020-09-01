@@ -198,6 +198,7 @@ func main() {
 		fmt.Println("時間格式")
 		A.TimetoFormat()
 		//A.SubDay()
+		A.TimeCmp()
 		fmt.Println("字串處理(向左補齊 向右補齊)")
 		B.PadLeft("123", 5, "0")
 		B.PadRight("123", 5, "0")
