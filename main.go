@@ -261,6 +261,13 @@ func main() {
 	} else {
 		//https://docs.nats.io/
 		//待補
+		
+
+
+
+
+
+
 	}
 
 	fmt.Println("Hello Word!")
