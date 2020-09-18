@@ -54,6 +54,11 @@ func TimetoFormat() {
 	//BBB := t.Minute()
 	//CCC := t.Second()
 	p("AAA =", sad)
+
+	//拿n天前
+	currentTime := time.Now()
+	oldTime := currentTime.AddDate(0, 0, -2) //要3天前的時間, 把-2改-3
+	p("n天前RFC3339 =", oldTime.Format(time.RFC3339))
 }
 
 //TimeCmp 比較時間
