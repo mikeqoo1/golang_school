@@ -17,6 +17,8 @@ func main() {
 	flag.Parse()
 	log.SetFlags(0)
 
+	var ch = make(chan int, 1)
+
 	interrupt := make(chan os.Signal, 2)
 	signal.Notify(interrupt, os.Interrupt)
 
@@ -33,15 +35,19 @@ func main() {
 	defer close(mj116)
 
 	var z = 0
-	go keepread(c, z)
+	go keepread(c, z, ch)
 
 	var count = 0
-	go keepwrite(c, count)
+	go keepwrite(c, count, ch)
 
-	select {}
+	select {
+	case <-ch:
+		fmt.Println("發送並接收完, 關閉連線")
+		c.Close()
+	}
 }
 
-func keepwrite(c *websocket.Conn, count int) {
+func keepwrite(c *websocket.Conn, count int, ch chan int) {
 	for {
 		count++
 		b := "{\"cmd\":\"action\", \"data\":\"1\"}"
@@ -60,7 +66,7 @@ func keepwrite(c *websocket.Conn, count int) {
 	}
 }
 
-func keepread(c *websocket.Conn, z int) {
+func keepread(c *websocket.Conn, z int, ch chan int) {
 	for {
 		wstype, message, err := c.ReadMessage()
 		if err != nil {
@@ -69,5 +75,9 @@ func keepread(c *websocket.Conn, z int) {
 		}
 		z++
 		log.Printf("Type:%d,收到的第%d筆, recv: %s", wstype, z, message)
+		if z == 51 {
+			ch <- 1
+			break
+		}
 	}
 }
