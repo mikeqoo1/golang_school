@@ -83,3 +83,29 @@ func TimeCmp() {
 		fmt.Println("現在時間 < 晚上")
 	}
 }
+
+//Duration 持續時間的類型比對
+func Duration() {
+	//Duration類型轉int64 float64
+	var durationseconds time.Duration = (1250 * 10) * time.Millisecond
+	var durationminute time.Duration = 2 * time.Minute
+	var float64seconds float64 = durationseconds.Seconds()
+	var float64minutes float64 = durationminute.Minutes()
+	fmt.Printf("Seconds [%.3f]\nMinutes [%.2f]\n", float64seconds, float64minutes)
+
+	//ms轉int64 float64
+	var duration500milliseconds time.Duration = 500 * time.Millisecond
+	var castToInt64 int64 = duration500milliseconds.Nanoseconds() / 1e6
+	var castToFloat64 float64 = duration500milliseconds.Seconds() * 1e3
+	fmt.Printf("Duration [%v]\ncastToInt64 [%d]\ncastToFloat64 [%.0f]\n", duration500milliseconds, castToInt64, castToFloat64)
+
+	//應用
+	var waitFiveHundredMillisections time.Duration = 500 * time.Millisecond
+	startingTime := time.Now().UTC()
+	time.Sleep(600 * time.Millisecond)
+	endingTime := time.Now().UTC()
+	var duration time.Duration = endingTime.Sub(startingTime)
+	if duration >= waitFiveHundredMillisections {
+		fmt.Printf("Wait %v\nNative [%v]\nMilliseconds [%d]\nSeconds [%.3f]\n", waitFiveHundredMillisections, duration, duration.Nanoseconds()/1e6, duration.Seconds())
+	}
+}
