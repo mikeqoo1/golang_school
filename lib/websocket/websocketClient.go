@@ -7,11 +7,13 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
+	"strconv"
 
 	"github.com/gorilla/websocket"
 )
 
 var addr = flag.String("addr", "192.168.88.186:30001", "http service address")
+var max int
 
 func main() {
 	flag.Parse()
@@ -25,9 +27,22 @@ func main() {
 	u := url.URL{Scheme: "ws", Host: *addr, Path: "/GsCmd186"}
 	log.Printf("connecting to %s", u.String())
 
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-	if err != nil {
-		log.Fatal("dial:", err)
+	var err error
+	if len(os.Args) <= 1 {
+		fmt.Println("沒有輸入參數, 改預設值50次")
+		max = 50
+	} else {
+		max, err = strconv.Atoi(os.Args[1])
+		if err != nil {
+			fmt.Println("輸入參數有誤, 以10次來處理")
+			max = 10
+		}
+	}
+	fmt.Println("Max值", max)
+
+	c, _, err2 := websocket.DefaultDialer.Dial(u.String(), nil)
+	if err2 != nil {
+		log.Fatal("dial:", err2)
 	}
 	defer c.Close()
 
@@ -51,7 +66,7 @@ func keepwrite(c *websocket.Conn, count int, ch chan int) {
 	for {
 		count++
 		b := "{\"cmd\":\"action\", \"data\":\"1\"}"
-		if count == 51 {
+		if count == max+1 {
 			b = "{\"cmd\":\"action\", \"data\":\"2\"}"
 		}
 		err := c.WriteMessage(websocket.TextMessage, []byte(b))
@@ -60,7 +75,7 @@ func keepwrite(c *websocket.Conn, count int, ch chan int) {
 			log.Println("write:", err)
 			c.Close()
 		}
-		if count == 51 {
+		if count == max+1 {
 			break
 		}
 	}
@@ -75,7 +90,7 @@ func keepread(c *websocket.Conn, z int, ch chan int) {
 		}
 		z++
 		log.Printf("Type:%d,收到的第%d筆, recv: %s", wstype, z, message)
-		if z == 51 {
+		if z == max+1 {
 			ch <- 1
 			break
 		}
