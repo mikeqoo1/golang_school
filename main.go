@@ -12,6 +12,7 @@ import (
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
+	Tree "golang_school/lib/tree"
 	"strconv"
 	"time"
 
@@ -33,6 +34,9 @@ var (
 
 	//IsInterview 面試題
 	IsInterview string
+
+	//IsTree 樹狀結構
+	IsTree string
 
 	pool *sql.DB
 )
@@ -259,15 +263,12 @@ func main() {
 		打印前
 		panic: 觸發異常
 		*/
+	} else if IsTree == "TURE" {
+		fmt.Printf(">>>>展示樹狀結構<<<<\n")
+		Tree.ThisTreeDemo()
 	} else {
 		//https://docs.nats.io/
 		//待補
-		
-
-
-
-
-
 
 	}
 
