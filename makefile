@@ -11,7 +11,12 @@ ifeq ($(other),1)
 IsOther=TURE
 endif
 
-LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD} -X main.IsLeetCode=${IsLeetCode} -X main.IsOther=${IsOther}"
+ifeq ($(tree),1)
+IsTree=TURE
+endif
+
+
+LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD} -X main.IsLeetCode=${IsLeetCode} -X main.IsOther=${IsOther} -X main.IsTree=${IsTree}"
 # 預設標籤: 編譯程式
 build:
 	go build ${LDFLAGS} -o ${BINARY}
