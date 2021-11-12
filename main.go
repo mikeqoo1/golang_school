@@ -112,7 +112,6 @@ func calcSum(arr []int, res chan int) {
 	for _, v := range arr {
 		sum += v
 	}
-
 	res <- sum
 }
 
