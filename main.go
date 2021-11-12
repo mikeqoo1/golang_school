@@ -13,6 +13,7 @@ import (
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	Tree "golang_school/lib/tree"
+	"sort"
 	"strconv"
 	"time"
 
@@ -113,6 +114,34 @@ func calcSum(arr []int, res chan int) {
 	}
 
 	res <- sum
+}
+
+type NbaPlayer struct {
+	Name   string
+	Points int
+	Min    int
+}
+
+type Players []NbaPlayer
+
+//取得長度
+func (p Players) Len() int { return len(p) }
+
+func (p Players) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
+
+//繼承NbaPlayer的所有屬性和方法 所以SortByPoints也實現了 Len() 和 Swap() 方法
+type SortByPoints struct{ Players }
+
+//根據得分大到小排序 (自己的排序邏輯)
+func (p SortByPoints) Less(i, j int) bool {
+	return p.Players[i].Points > p.Players[j].Points
+}
+
+type SortByMin struct{ Players }
+
+//按上場照時間大到小排序 (自己的排序邏輯)
+func (p SortByMin) Less(i, j int) bool {
+	return p.Players[i].Min > p.Players[j].Min
 }
 
 func main() {
@@ -269,7 +298,54 @@ func main() {
 	} else {
 		//https://docs.nats.io/
 		//待補
+	}
 
+	playerlist := Players{
+		{
+			Name:   "Kobe Bryant",
+			Points: 33643,
+			Min:    48643,
+		},
+		{
+			Name:   "Michael Jordan",
+			Points: 32292,
+			Min:    41010,
+		},
+		{
+			Name:   "LeBron James",
+			Points: 35516,
+			Min:    50276,
+		},
+		{
+			Name:   "Kareem Abdul-Jabbar",
+			Points: 38387,
+			Min:    57446,
+		},
+		{
+			Name:   "Karl Malone",
+			Points: 36928,
+			Min:    54852,
+		},
+	}
+
+	fmt.Println("得分排序前")
+	for _, play := range playerlist {
+		fmt.Println(play.Name, ":", play.Points, "分")
+	}
+	sort.Sort(SortByPoints{playerlist})
+	fmt.Println("得分排序後")
+	for _, play := range playerlist {
+		fmt.Println(play.Name, ":", play.Points, "分")
+	}
+
+	fmt.Println("上場時間排序前")
+	for _, play := range playerlist {
+		fmt.Println(play.Name, ":", play.Min, "分鐘")
+	}
+	sort.Sort(SortByMin{playerlist})
+	fmt.Println("上場時間排序後")
+	for _, play := range playerlist {
+		fmt.Println(play.Name, ":", play.Min, "分鐘")
 	}
 
 	fmt.Println("Hello Word!")
