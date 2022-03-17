@@ -146,7 +146,6 @@ func main() {
 
 	argsWithProg := os.Args
 
-	fmt.Println(argsWithProg[1])
 	if len(argsWithProg) == 1 { //跑全部
 		fmt.Println("請帶參數 1跑leetcode 2跑樹狀展示 3跑有的沒的 4跑面試 5跑GTK 6跑排序")
 	} else {
