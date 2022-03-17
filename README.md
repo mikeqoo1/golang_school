@@ -7,16 +7,22 @@ golang小教室
 * Creating Packages
 ```
 要先移倒該lib目錄下執行go install,編譯出類似c的lib連結檔,接下來就可以到main.go中,import後就可以使用
+
+
+一個目錄下的同級檔案屬於同一個package
+package名稱可以與目錄不同名稱, 但盡可能一樣
+main package為應用程式執行的entry point; 若沒有main package則無法編譯成可執行的檔案在bin下
+package name, Go團隊建議簡單扁平為原則。 所以盡量避免下划線、中划線和參雜大寫字母。
 ```
 
 # 範例執行
 go run main.go就可以
 go test -v -bench=. 測試名稱_test.go -benchmem
 
-#MakeFile說明
-make leetcode=1 會編譯出跑LeetCode的程式
+執行帶參數1跑leetcode 2跑樹狀展示 3跑有的沒的 4跑面試 5跑GTK 6跑排序
 
-make就只跑原本的小功能, 不跑LeetCode
+# MakeFile說明
+make
 
 ## GOMOD 說明
 
