@@ -9,10 +9,12 @@ import (
 	E "golang_school/lib/egg"
 	F "golang_school/lib/file"
 	C "golang_school/lib/gochannels"
+	G "golang_school/lib/gtkkk"
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	Tree "golang_school/lib/tree"
+	"os"
 	"sort"
 	"strconv"
 	"time"
@@ -26,18 +28,6 @@ var (
 
 	//Build 編譯版本
 	Build string
-
-	//IsLeetCode 是不是跑LeetCode
-	IsLeetCode string
-
-	//IsOther 其他項目的程式
-	IsOther string
-
-	//IsInterview 面試題
-	IsInterview string
-
-	//IsTree 樹狀結構
-	IsTree string
 
 	pool *sql.DB
 )
@@ -153,202 +143,207 @@ func main() {
 	F.LOG.Info(" ", zap.String("Version: ", Version))
 	F.LOG.Info(" ", zap.String("Build time: ", Build))
 	F.LOG.Info("GoMod")
-	if IsLeetCode == "TURE" {
-		fmt.Println("LeetcodeNo.3")
-		fmt.Println(B.LengthOfLongestSubstring("aab"))
-		fmt.Println(B.LengthOfLongestSubstring("aab"))
-		fmt.Println(B.LengthOfLongestSubstring("bbbbb"))
-		fmt.Println(B.LengthOfLongestSubstring("pwwkew"))
 
-		nums1 := []int{1, 2}
-		nums2 := []int{3, 4}
-		ans1 := L.FindMedianSortedArrays(nums1, nums2)
-		fmt.Println(ans1)
+	argsWithProg := os.Args
 
-		ans2 := L.Reverse(-123)
-		fmt.Println(ans2)
-
-		ans3 := L.MyAtoi(" -456")
-		fmt.Println(ans3)
-
-		ans4 := L.IsPalindrome(121)
-		fmt.Println(ans4)
-
-		a := []int{-1, 0, 1, 2, -1, -4}
-		b := L.ThreeSum(a)
-		fmt.Println(b)
-
-		fmt.Println(L.LetterCombinations("56"))
-
-		fmt.Println(L.FourSum(a, 0))
-		fmt.Println(L.IsValid("{[]}"))
-		//ListNode
-		fmt.Println("ListNode 相關")
-		var l1 L.ListNode
-		l1.Val = 1
-		l1.Next = new(L.ListNode)
-		fmt.Println("1.", l1)
-
-		l1.Next.Val = 2
-		l1.Next.Next = new(L.ListNode)
-		fmt.Println("2.", l1.Next)
-
-		l1.Next.Next.Val = 3
-		l1.Next.Next.Next = new(L.ListNode)
-		fmt.Println("3.", l1.Next.Next)
-
-		l1.Next.Next.Next.Val = 4
-		l1.Next.Next.Next.Next = new(L.ListNode)
-		fmt.Println("4.", l1.Next.Next.Next)
-
-		l1.Next.Next.Next.Next.Val = 5
-		fmt.Println("5.", l1.Next.Next.Next.Next)
-
-		fmt.Println("原本l1", l1, l1.Next, l1.Next.Next, l1.Next.Next.Next, l1.Next.Next.Next.Next)
-		fmt.Println("leetcode 19")
-		l5 := L.RemoveNthFromEnd(&l1, 2)
-		fmt.Println("過了leetcode 19 list", l5, l5.Next, l5.Next.Next, l5.Next.Next.Next, l5.Next.Next.Next.Next)
-
-		numberarray := []int{1, 2, 3, 4, 5, 6, 7, 8}
-		lkk := &L.ListNode{Val: numberarray[0], Next: nil}
-		p := lkk
-		for _, r := range numberarray[1:] {
-			node := &L.ListNode{Val: r, Next: nil}
-			p.Next = node
-			p = p.Next
-		}
-		k := 3
-		res := L.ReverseKGroup(lkk, k)
-		for res != nil {
-			if res.Next != nil {
-				fmt.Printf("%d->", res.Val)
-			} else {
-				fmt.Printf("%d", res.Val)
-			}
-			res = res.Next
-		}
-		L.RemoveDuplicates(a)
-	} else if IsOther == "TURE" {
-		//S.SendEmail()
-		fmt.Println("時間格式")
-		A.TimetoFormat()
-		//A.SubDay()
-		A.TimeCmp()
-		fmt.Println("字串處理(向左補齊 向右補齊)")
-		B.PadLeft("123", 5, "0")
-		B.PadRight("123", 5, "0")
-		fmt.Println("Json格式轉換Struct")
-		B.TestJSONToStruct()
-		fmt.Println("Struct轉換Json格式")
-		B.TestStructToJSON()
-		fmt.Println("Goroutine")
-		C.TestChannel()
-		byteA := []byte{255, 255, 177, 224} //-20000
-		val, _ := B.BytesToIntS(byteA)
-		fmt.Println(val)
-		strint := strconv.FormatInt(int64(val), 10)
-		fmt.Println(strint)
-
-		egg := E.NewWaterEgg()
-		egg.SetTestSyncMapValue("房東與貓", "往往")
-		a := egg.GetTestSyncMapValue("房東與貓")
-		fmt.Println(a.Name)
-		fmt.Println(a.Number)
-		a = egg.GetTestSyncMapValue("湖泊樂隊")
-		fmt.Println(a.Name)
-		//切包測試
-		originalsdata := []byte{170, 2, 50, 84, 50, 48, 2, 255, 48, 49, 51, 51, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 130, 0, 0, 0, 55, 93, 240, 173, 10, 2, 23, 102, 1, 4, 1, 249, 0, 52, 1, 4, 1, 4, 65, 48, 48, 55, 49, 0, 0, 0, 44, 48, 48, 48, 48, 48, 49, 50, 49, 2, 84, 88, 70, 76, 57, 47, 65, 48, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 255, 255, 244, 72, 0, 3, 0, 150, 50, 124, 49, 1, 2, 0, 79, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 237, 64, 0, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 240, 172, 214, 1, 142, 93, 240, 173, 10, 2, 23, 4, 0, 0, 5, 218, 0, 0, 0, 55, 1, 146, 10}
-		Kobe = MambaMentality(originalsdata)
-	} else if IsInterview == "TURE" {
-		//面試題
-
-		//用goroutine 實作 1加到100
-		var res = make(chan int)
-		var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-		go calcSum(arr[:5], res)
-		go calcSum(arr[5:], res)
-		sum := <-res
-		sum += <-res
-		fmt.Println("sum =", sum)
-
-		ctx, cancel := context.WithCancel(context.Background())
-		go watch(ctx, "【監控1】")
-		go watch(ctx, "【監控2】")
-		go watch(ctx, "【監控3】")
-
-		time.Sleep(10 * time.Second)
-		fmt.Println("可以了，通知監控停止")
-		cancel()
-		//為了檢測監控過是否停止，如果没有監控輸出，就表示停止了
-		time.Sleep(5 * time.Second)
-
-		defer func() { fmt.Println("打印前") }()
-		defer func() { fmt.Println("打印中") }()
-		defer func() { fmt.Println("打印後") }()
-		panic("觸發異常")
-		/* 結果
-		打印後
-		打印中
-		打印前
-		panic: 觸發異常
-		*/
-	} else if IsTree == "TURE" {
-		fmt.Printf(">>>>展示樹狀結構<<<<\n")
-		Tree.ThisTreeDemo()
+	fmt.Println(argsWithProg[1])
+	if len(argsWithProg) == 1 { //跑全部
+		fmt.Println("請帶參數 1跑leetcode 2跑樹狀展示 3跑有的沒的 4跑面試 5跑GTK 6跑排序")
 	} else {
+		if os.Args[1] == "1" {
+			fmt.Println("LeetcodeNo.3")
+			fmt.Println(B.LengthOfLongestSubstring("aab"))
+			fmt.Println(B.LengthOfLongestSubstring("aab"))
+			fmt.Println(B.LengthOfLongestSubstring("bbbbb"))
+			fmt.Println(B.LengthOfLongestSubstring("pwwkew"))
+
+			nums1 := []int{1, 2}
+			nums2 := []int{3, 4}
+			ans1 := L.FindMedianSortedArrays(nums1, nums2)
+			fmt.Println(ans1)
+
+			ans2 := L.Reverse(-123)
+			fmt.Println(ans2)
+
+			ans3 := L.MyAtoi(" -456")
+			fmt.Println(ans3)
+
+			ans4 := L.IsPalindrome(121)
+			fmt.Println(ans4)
+
+			a := []int{-1, 0, 1, 2, -1, -4}
+			b := L.ThreeSum(a)
+			fmt.Println(b)
+
+			fmt.Println(L.LetterCombinations("56"))
+
+			fmt.Println(L.FourSum(a, 0))
+			fmt.Println(L.IsValid("{[]}"))
+			//ListNode
+			fmt.Println("ListNode 相關")
+			var l1 L.ListNode
+			l1.Val = 1
+			l1.Next = new(L.ListNode)
+			fmt.Println("1.", l1)
+
+			l1.Next.Val = 2
+			l1.Next.Next = new(L.ListNode)
+			fmt.Println("2.", l1.Next)
+
+			l1.Next.Next.Val = 3
+			l1.Next.Next.Next = new(L.ListNode)
+			fmt.Println("3.", l1.Next.Next)
+			fmt.Printf(">>>>展示樹狀結構<<<<\n")
+			Tree.ThisTreeDemo()
+			l1.Next.Next.Next.Val = 4
+			l1.Next.Next.Next.Next = new(L.ListNode)
+			fmt.Println("4.", l1.Next.Next.Next)
+
+			l1.Next.Next.Next.Next.Val = 5
+			fmt.Println("5.", l1.Next.Next.Next.Next)
+
+			fmt.Println("原本l1", l1, l1.Next, l1.Next.Next, l1.Next.Next.Next, l1.Next.Next.Next.Next)
+			fmt.Println("leetcode 19")
+			l5 := L.RemoveNthFromEnd(&l1, 2)
+			fmt.Println("過了leetcode 19 list", l5, l5.Next, l5.Next.Next, l5.Next.Next.Next, l5.Next.Next.Next.Next)
+
+			numberarray := []int{1, 2, 3, 4, 5, 6, 7, 8}
+			lkk := &L.ListNode{Val: numberarray[0], Next: nil}
+			p := lkk
+			for _, r := range numberarray[1:] {
+				node := &L.ListNode{Val: r, Next: nil}
+				p.Next = node
+				p = p.Next
+			}
+			k := 3
+			res := L.ReverseKGroup(lkk, k)
+			for res != nil {
+				if res.Next != nil {
+					fmt.Printf("%d->", res.Val)
+				} else {
+					fmt.Printf("%d", res.Val)
+				}
+				res = res.Next
+			}
+			L.RemoveDuplicates(a)
+		} else if os.Args[1] == "2" {
+			fmt.Printf(">>>>展示樹狀結構<<<<\n")
+			Tree.ThisTreeDemo()
+		} else if os.Args[1] == "3" {
+			//S.SendEmail()
+			fmt.Println("時間格式")
+			A.TimetoFormat()
+			//A.SubDay()
+			A.TimeCmp()
+			fmt.Println("字串處理(向左補齊 向右補齊)")
+			B.PadLeft("123", 5, "0")
+			B.PadRight("123", 5, "0")
+			fmt.Println("Json格式轉換Struct")
+			B.TestJSONToStruct()
+			fmt.Println("Struct轉換Json格式")
+			B.TestStructToJSON()
+			fmt.Println("Goroutine")
+			C.TestChannel()
+			byteA := []byte{255, 255, 177, 224} //-20000
+			val, _ := B.BytesToIntS(byteA)
+			fmt.Println(val)
+			strint := strconv.FormatInt(int64(val), 10)
+			fmt.Println(strint)
+
+			egg := E.NewWaterEgg()
+			egg.SetTestSyncMapValue("房東與貓", "往往")
+			a := egg.GetTestSyncMapValue("房東與貓")
+			fmt.Println(a.Name)
+			fmt.Println(a.Number)
+			a = egg.GetTestSyncMapValue("湖泊樂隊")
+			fmt.Println(a.Name)
+			//切包測試
+			originalsdata := []byte{170, 2, 50, 84, 50, 48, 2, 255, 48, 49, 51, 51, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 130, 0, 0, 0, 55, 93, 240, 173, 10, 2, 23, 102, 1, 4, 1, 249, 0, 52, 1, 4, 1, 4, 65, 48, 48, 55, 49, 0, 0, 0, 44, 48, 48, 48, 48, 48, 49, 50, 49, 2, 84, 88, 70, 76, 57, 47, 65, 48, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 255, 255, 244, 72, 0, 3, 0, 150, 50, 124, 49, 1, 2, 0, 79, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255, 255, 237, 64, 0, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 240, 172, 214, 1, 142, 93, 240, 173, 10, 2, 23, 4, 0, 0, 5, 218, 0, 0, 0, 55, 1, 146, 10}
+			Kobe = MambaMentality(originalsdata)
+		} else if os.Args[1] == "4" {
+			//用goroutine 實作 1加到100
+			var res = make(chan int)
+			var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+			go calcSum(arr[:5], res)
+			go calcSum(arr[5:], res)
+			sum := <-res
+			sum += <-res
+			fmt.Println("sum =", sum)
+
+			ctx, cancel := context.WithCancel(context.Background())
+			go watch(ctx, "【監控1】")
+			go watch(ctx, "【監控2】")
+			go watch(ctx, "【監控3】")
+
+			time.Sleep(10 * time.Second)
+			fmt.Println("可以了，通知監控停止")
+			cancel()
+			//為了檢測監控過是否停止，如果没有監控輸出，就表示停止了
+			time.Sleep(5 * time.Second)
+
+			// 結果 打印後 打印中 打印前 panic: 觸發異常
+			defer func() { fmt.Println("打印前") }()
+			defer func() { fmt.Println("打印中") }()
+			defer func() { fmt.Println("打印後") }()
+			panic("觸發異常")
+		} else if os.Args[1] == "5" {
+			fmt.Println("GTK")
+			G.Run()
+		} else if os.Args[1] == "6" {
+			playerlist := Players{
+				{
+					Name:   "Kobe Bryant",
+					Points: 33643,
+					Min:    48643,
+				},
+				{
+					Name:   "Michael Jordan",
+					Points: 32292,
+					Min:    41010,
+				},
+				{
+					Name:   "LeBron James",
+					Points: 35516,
+					Min:    50276,
+				},
+				{
+					Name:   "Kareem Abdul-Jabbar",
+					Points: 38387,
+					Min:    57446,
+				},
+				{
+					Name:   "Karl Malone",
+					Points: 36928,
+					Min:    54852,
+				},
+			}
+
+			fmt.Println("得分排序前")
+			for _, play := range playerlist {
+				fmt.Println(play.Name, ":", play.Points, "分")
+			}
+			sort.Sort(SortByPoints{playerlist})
+			fmt.Println("得分排序後")
+			for _, play := range playerlist {
+				fmt.Println(play.Name, ":", play.Points, "分")
+			}
+
+			fmt.Println("上場時間排序前")
+			for _, play := range playerlist {
+				fmt.Println(play.Name, ":", play.Min, "分鐘")
+			}
+			sort.Sort(SortByMin{playerlist})
+			fmt.Println("上場時間排序後")
+			for _, play := range playerlist {
+				fmt.Println(play.Name, ":", play.Min, "分鐘")
+			}
+		} else {
+			fmt.Println("1跑leetcode 2跑樹狀展示 3跑有的沒的 4跑面試 5跑GTK 6跑排序")
+		}
 		//https://docs.nats.io/
 		//待補
 	}
-
-	playerlist := Players{
-		{
-			Name:   "Kobe Bryant",
-			Points: 33643,
-			Min:    48643,
-		},
-		{
-			Name:   "Michael Jordan",
-			Points: 32292,
-			Min:    41010,
-		},
-		{
-			Name:   "LeBron James",
-			Points: 35516,
-			Min:    50276,
-		},
-		{
-			Name:   "Kareem Abdul-Jabbar",
-			Points: 38387,
-			Min:    57446,
-		},
-		{
-			Name:   "Karl Malone",
-			Points: 36928,
-			Min:    54852,
-		},
-	}
-
-	fmt.Println("得分排序前")
-	for _, play := range playerlist {
-		fmt.Println(play.Name, ":", play.Points, "分")
-	}
-	sort.Sort(SortByPoints{playerlist})
-	fmt.Println("得分排序後")
-	for _, play := range playerlist {
-		fmt.Println(play.Name, ":", play.Points, "分")
-	}
-
-	fmt.Println("上場時間排序前")
-	for _, play := range playerlist {
-		fmt.Println(play.Name, ":", play.Min, "分鐘")
-	}
-	sort.Sort(SortByMin{playerlist})
-	fmt.Println("上場時間排序後")
-	for _, play := range playerlist {
-		fmt.Println(play.Name, ":", play.Min, "分鐘")
-	}
-
-	fmt.Println("Hello Word!")
+	fmt.Println("\nHello Word!")
 }
 
 func watch(ctx context.Context, name string) {
