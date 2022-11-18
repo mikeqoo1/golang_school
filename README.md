@@ -78,3 +78,15 @@ STW (stop the world)
 
 - https://github.com/qcrao/Go-Questions
 
+
+## GoTK3的坑
+
+```txt
+新版本的glib2（2.68.1.1及以上版本）的接口與gotk3庫的函式不兼容問題
+gotk3裡面的
+"g_binding_get_source" "g_binding_get_target" "g_binding_get_source_property"  舊版本
+分别被
+"g_binding_dup_source" "g_binding_dup_target" "g_binding_get_target_property"  新版本./
+替換掉了
+但是gotk3卻没有修改, 如github.com\gotk3\gotk3@v0.6.1\glib\gbinding.go中还是用了舊的宣告 沒有把廢掉的宣告替换 所以只需要把廢掉的宣告替换就可以正常了
+```
