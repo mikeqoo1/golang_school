@@ -9,12 +9,13 @@ import (
 	E "golang_school/lib/egg"
 	F "golang_school/lib/file"
 	C "golang_school/lib/gochannels"
-	G "golang_school/lib/gtkkk"
+	//G "golang_school/lib/gtkkk"
 	L "golang_school/lib/leetcode"
 	B "golang_school/lib/string"
 	A "golang_school/lib/time"
 	Tree "golang_school/lib/tree"
 	"os"
+	"runtime/pprof"
 	"sort"
 	"strconv"
 	"time"
@@ -38,7 +39,7 @@ func init() {
 	F.LOG.Info("log 初始化成功")
 }
 
-//MambaOut R.I.P #24 #8
+// MambaOut R.I.P #24 #8
 type MambaOut struct {
 	bodyID     string //size 1
 	exCode     string //size 1
@@ -51,10 +52,10 @@ type MambaOut struct {
 	therestStr []byte
 }
 
-//Kobe Bryant If you're afraid to fail, then you're probably going to fail.
+// Kobe Bryant If you're afraid to fail, then you're probably going to fail.
 var Kobe MambaOut
 
-//MambaMentality Mamba Mentality Never Ends
+// MambaMentality Mamba Mentality Never Ends
 func MambaMentality(originalsdata []byte) MambaOut {
 	originalsdata = append(originalsdata, Kobe.therestStr...) //接上之前的剩餘
 	index := bytes.IndexByte(originalsdata, byte('\n'))
@@ -114,27 +115,36 @@ type NbaPlayer struct {
 
 type Players []NbaPlayer
 
-//取得長度
+// 取得長度
 func (p Players) Len() int { return len(p) }
 
 func (p Players) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
-//繼承NbaPlayer的所有屬性和方法 所以SortByPoints也實現了 Len() 和 Swap() 方法
+// 繼承NbaPlayer的所有屬性和方法 所以SortByPoints也實現了 Len() 和 Swap() 方法
 type SortByPoints struct{ Players }
 
-//根據得分大到小排序 (自己的排序邏輯)
+// 根據得分大到小排序 (自己的排序邏輯)
 func (p SortByPoints) Less(i, j int) bool {
 	return p.Players[i].Points > p.Players[j].Points
 }
 
 type SortByMin struct{ Players }
 
-//按上場照時間大到小排序 (自己的排序邏輯)
+// 按上場照時間大到小排序 (自己的排序邏輯)
 func (p SortByMin) Less(i, j int) bool {
 	return p.Players[i].Min > p.Players[j].Min
 }
 
 func main() {
+	// CPU 跟 記憶體 的效能分析檔
+	cpuFile, _ := os.OpenFile("cpu.prof", os.O_CREATE|os.O_RDWR, 0644)
+	defer cpuFile.Close()
+	pprof.StartCPUProfile(cpuFile)
+	defer pprof.StopCPUProfile()
+	memFile, _ := os.OpenFile("mem.prof", os.O_CREATE|os.O_RDWR, 0644)
+	defer memFile.Close()
+	pprof.WriteHeapProfile(memFile)
+
 	// F.LOG.Info("星夜裡的人",
 	// 	zap.String("url", "https://www.youtube.com/watch?v=RnsVmZDQaJA"),
 	// 	zap.Int("時間", 3),
@@ -287,7 +297,7 @@ func main() {
 			panic("觸發異常")
 		} else if os.Args[1] == "5" {
 			fmt.Println("GTK")
-			G.Run()
+			//G.Run()
 		} else if os.Args[1] == "6" {
 			playerlist := Players{
 				{

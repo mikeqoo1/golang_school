@@ -90,3 +90,20 @@ gotk3裡面的
 替換掉了
 但是gotk3卻没有修改, 如github.com\gotk3\gotk3@v0.6.1\glib\gbinding.go中还是用了舊的宣告 沒有把廢掉的宣告替换 所以只需要把廢掉的宣告替换就可以正常了
 ```
+
+## pprof 效能分析
+
+```txt
+預先安裝 sudo apt-get install graphviz
+分2步
+1. 產生數據
+
+2. 分析數據
+
+go tool pprof -http=:8000 profile
+
+會在本地端的8000產生結果
+
+https://juejin.cn/post/7122473470424219656
+https://developer.aliyun.com/article/1109652
+```
