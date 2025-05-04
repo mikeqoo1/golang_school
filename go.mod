@@ -1,15 +1,14 @@
 module golang_school
 
 go 1.21
-
-toolchain go1.22.2
+toolchain go1.24.1
 
 require (
 	github.com/evanphx/wildcat v0.0.0-20141114174135-e7012f664567
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gotk3/gotk3 v0.6.1
 	github.com/panjf2000/gnet/v2 v2.7.2
-	github.com/quic-go/quic-go v0.42.0
+	github.com/quic-go/quic-go v0.48.2
 	go.uber.org/zap v1.27.0
 )
 
@@ -22,12 +21,12 @@ require (
 	github.com/vektra/errors v0.0.0-20140903201135-c64d83aba85a // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.21.0 // indirect
-	golang.org/x/exp v0.0.0-20221205204356-47842c84f3db // indirect
-	golang.org/x/mod v0.11.0 // indirect
-	golang.org/x/net v0.23.0 // indirect
+	golang.org/x/crypto v0.26.0 // indirect
+	golang.org/x/exp v0.0.0-20240506185415-9bf2ced13842 // indirect
+	golang.org/x/mod v0.17.0 // indirect
+	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/sync v0.11.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/tools v0.9.1 // indirect
+	golang.org/x/tools v0.21.1-0.20240508182429-e35e4ccd0d2d // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 )
