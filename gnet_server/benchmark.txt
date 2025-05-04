@@ -1,0 +1,14 @@
+wrk -t 1 -c 200 -d 30 --latency http://127.0.0.1:9080
+Running 30s test @ http://127.0.0.1:9080
+  1 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   403.95us  197.10us  17.93ms   99.50%
+    Req/Sec   252.30k    10.00k  269.10k    68.00%
+  Latency Distribution
+     50%  396.00us
+     75%  438.00us
+     90%  485.00us
+     99%  563.00us
+  7532449 requests in 30.00s, 826.10MB read
+Requests/sec: 251063.07
+Transfer/sec:     27.53MB
